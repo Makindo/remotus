@@ -1,0 +1,3 @@
+class TwitterSearch < Search
+
+end

@@ -1,0 +1,75 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.twitter.com/1.1/statuses/show/1.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - Twitter Ruby Gem 4.8.1
+      Connection:
+      - ''
+      Authorization:
+      - OAuth oauth_consumer_key="bbUHiFMjFhOkhial9izPg", oauth_nonce="a9eaf00987b6a4b4037cfd69534d35bf",
+        oauth_signature="abMZoSRG2%2FiPzAdltg5N%2Fv4ANhY%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1378667801", oauth_token="55137522-Q1ihDmuaxkdYKxQaAjaQ8Z6ljo3lUPLP9gLhZo7Q1",
+        oauth_version="1.0"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      Content-Length:
+      - '927'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sun, 08 Sep 2013 19:16:41 GMT
+      Expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      Last-Modified:
+      - Sun, 08 Sep 2013 19:16:41 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - tfe
+      Set-Cookie:
+      - guest_id=v1%3A137866780100755675; Domain=.twitter.com; Path=/; Expires=Tue,
+        08-Sep-2015 19:16:41 UTC
+      - lang=en
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=631138519
+      X-Access-Level:
+      - read
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Rate-Limit-Limit:
+      - '180'
+      X-Rate-Limit-Remaining:
+      - '178'
+      X-Rate-Limit-Reset:
+      - '1378668664'
+      X-Transaction:
+      - cc534d1bd2435389
+    body:
+      encoding: UTF-8
+      string: '{"created_at":"Sun Sep 08 19:15:52 +0000 2013","id":376785979216257024,"id_str":"376785979216257024","text":"Sunday
+        afternoon Ikea is not best Ikea.","source":"\u003ca href=\"http:\/\/tapbots.com\/tweetbot\"
+        rel=\"nofollow\"\u003eTweetbot for iOS\u003c\/a\u003e","truncated":false,"in_reply_to_status_id":null,"in_reply_to_status_id_str":null,"in_reply_to_user_id":null,"in_reply_to_user_id_str":null,"in_reply_to_screen_name":null,"user":{"id":2011081,"id_str":"2011081","name":"Rob
+        Donoghue","screen_name":"rdonoghue","location":"Maryland, USA","description":"Business
+        Analyst & Game Designer","url":"http:\/\/t.co\/y3w9AZtu7B","entities":{"url":{"urls":[{"url":"http:\/\/t.co\/y3w9AZtu7B","expanded_url":"http:\/\/walkingmind.evilhat.com","display_url":"walkingmind.evilhat.com","indices":[0,22]}]},"description":{"urls":[]}},"protected":false,"followers_count":2546,"friends_count":504,"listed_count":222,"created_at":"Fri
+        Mar 23 13:27:42 +0000 2007","favourites_count":2178,"utc_offset":-14400,"time_zone":"Eastern
+        Time (US & Canada)","geo_enabled":false,"verified":false,"statuses_count":54873,"lang":"en","contributors_enabled":false,"is_translator":false,"profile_background_color":"13273D","profile_background_image_url":"http:\/\/a0.twimg.com\/profile_background_images\/3074273\/sidebar3.png","profile_background_image_url_https":"https:\/\/si0.twimg.com\/profile_background_images\/3074273\/sidebar3.png","profile_background_tile":false,"profile_image_url":"http:\/\/a0.twimg.com\/profile_images\/3622423434\/2ff80873f2e827c67c3ea6cfdf66e055_normal.jpeg","profile_image_url_https":"https:\/\/si0.twimg.com\/profile_images\/3622423434\/2ff80873f2e827c67c3ea6cfdf66e055_normal.jpeg","profile_link_color":"044058","profile_sidebar_border_color":"13273D","profile_sidebar_fill_color":"B1CCD8","profile_text_color":"41260B","profile_use_background_image":true,"default_profile":false,"default_profile_image":false,"following":true,"follow_request_sent":false,"notifications":null},"geo":null,"coordinates":null,"place":null,"contributors":null,"retweet_count":0,"favorite_count":0,"entities":{"hashtags":[],"symbols":[],"urls":[],"user_mentions":[]},"favorited":false,"retweeted":false,"lang":"en"}'
+    http_version:
+  recorded_at: Sun, 08 Sep 2013 19:16:41 GMT
+recorded_with: VCR 2.5.0

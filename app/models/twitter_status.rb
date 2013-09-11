@@ -1,0 +1,2 @@
+class TwitterStatus < Status
+end

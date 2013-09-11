@@ -1,0 +1,3 @@
+class TwitterProfile < Profile
+
+end
