@@ -1,5 +1,8 @@
 require "twitter"
+require "koala"
 require "sidekiq"
+require "skittles"
+require "pipl-api"
 require "astruct"
 
 module Remote
