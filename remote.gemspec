@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "koala", "~> 1.6"
   spec.add_runtime_dependency "skittles", "~> 0.6"
   spec.add_runtime_dependency "pipl-api", "~> 3.0"
+  spec.add_runtime_dependency "geocoder", "~> 1.1"
   spec.add_runtime_dependency "astruct", "~> 2.11"
   spec.add_runtime_dependency "redis", "~> 3.0"
   spec.add_runtime_dependency "redis-rails", "~> 4.0"

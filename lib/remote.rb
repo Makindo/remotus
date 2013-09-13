@@ -3,6 +3,7 @@ require "koala"
 require "sidekiq"
 require "skittles"
 require "pipl-api"
+require "geocoder"
 require "astruct"
 
 module Remote
