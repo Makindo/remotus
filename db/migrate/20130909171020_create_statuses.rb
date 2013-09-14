@@ -8,11 +8,11 @@ class CreateStatuses < ActiveRecord::Migration
       t.text :data, null: false
       t.float :latitude
       t.float :longitude
-      t.boolean :gone, default: false
+      t.boolean :exists, default: false
       t.float :positive, default: 0.0
       t.float :negative, default: 0.0
       t.index [:external_id, :type], unique: true
-      t.index :gone, where: "(vote IS FALSE)"
+      t.index :exists, where: "(exists IS FALSE)"
 
       t.timestamps
     end
