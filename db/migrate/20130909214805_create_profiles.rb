@@ -8,9 +8,9 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :location
       t.string :name
       t.string :username, index: true
-      t.boolean :gone, default: false
+      t.boolean :exists, default: false
       t.index [:external_id, :type], unique: true
-      t.index :gone, where: "(vote IS FALSE)"
+      t.index :exists, where: "(exists IS FALSE)"
     end
   end
 end
