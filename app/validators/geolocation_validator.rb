@@ -1,4 +1,4 @@
-classGeolocationValidator < ActiveModel::Validator
+class GeolocationValidator < ActiveModel::Validator
   def validate(record)
     @record = record
     @record.errors[:address] << "is completely empty" if incomplete?
