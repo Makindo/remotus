@@ -1,0 +1,3 @@
+class PiplName < Name
+
+end
