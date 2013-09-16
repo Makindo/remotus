@@ -5,6 +5,7 @@ class Status < ActiveRecord::Base
   belongs_to :profile
   has_and_belongs_to_many :searches
   has_one :geolocation
+  has_one :vote
 
   validates_with StatusValidator
 
