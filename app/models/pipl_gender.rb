@@ -1,0 +1,3 @@
+class PiplGender < Gender
+
+end
