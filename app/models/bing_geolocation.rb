@@ -1,0 +1,3 @@
+class BingGeolocation < Location
+
+end
