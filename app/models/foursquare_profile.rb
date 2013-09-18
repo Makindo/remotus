@@ -1,0 +1,3 @@
+class FoursquareProfile < Profile
+
+end
