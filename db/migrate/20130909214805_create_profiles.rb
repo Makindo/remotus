@@ -9,6 +9,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :name
       t.string :username, index: true
       t.boolean :exists, default: false
+      t.timestamps
       t.index [:external_id, :type], unique: true
       t.index :exists, where: "(exists IS FALSE)"
     end

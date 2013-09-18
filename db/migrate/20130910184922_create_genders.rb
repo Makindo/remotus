@@ -6,6 +6,7 @@ class CreateGenders < ActiveRecord::Migration
       t.string :type, index: true
       t.text :data
       t.belongs_to :person, index: true
+      t.timestamps
     end
   end
 end

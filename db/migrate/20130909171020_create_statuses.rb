@@ -11,10 +11,9 @@ class CreateStatuses < ActiveRecord::Migration
       t.boolean :exists, default: false
       t.float :positive, default: 0.0
       t.float :negative, default: 0.0
+      t.timestamps
       t.index [:external_id, :type], unique: true
       t.index :exists, where: "(exists IS FALSE)"
-
-      t.timestamps
     end
   end
 end

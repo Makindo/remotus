@@ -3,9 +3,8 @@ class CreateSearches < ActiveRecord::Migration
     create_table :searches do |t|
       t.string :query, null: false
       t.string :type, null: false
-      t.index [:query, :type], unique: true
-
       t.timestamps
+      t.index [:query, :type], unique: true
     end
   end
 end
