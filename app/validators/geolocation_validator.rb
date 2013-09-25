@@ -7,7 +7,7 @@ class GeolocationValidator < ActiveModel::Validator
   private
 
   def incomplete?
-    @record.city.empty? && @record.state.empty? && @record.country.empty?
+    @record.city.blank? && @record.state.blank? && @record.country.blank?
   end
 end
 
