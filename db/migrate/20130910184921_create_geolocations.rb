@@ -13,7 +13,7 @@ class CreateGeolocations < ActiveRecord::Migration
       t.float :latitude
       t.float :longitude
       t.timestamps
-      t.index [:city, :state, :country], unique: true
+      t.index [:city, :state, :country, :person_id], unique: true
     end
   end
 end
