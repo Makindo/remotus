@@ -9,6 +9,30 @@ class Status < ActiveRecord::Base
 
   validates_with StatusValidator
 
+  def self.nonbad
+    where { vote.eq(nil) | vote.eq(true) }
+  end
+
+  def self.neutral
+    where(vote: nil)
+  end
+
+  def self.good
+    where(vote: true)
+  end
+
+  def self.bad
+    where(vote: false)
+  end
+
+  def self.result
+    where { search_id.not_eq(nil) }
+  end
+
+  def disliked?
+    !vote?
+  end
+
   def fetch_data
     FetchStatusDataWorker.perform_async(id)
   end

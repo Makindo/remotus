@@ -1,5 +1,5 @@
 class Search < ActiveRecord::Base
-  # after_create :fetch_results
+  after_create :fetch_results
 
   has_and_belongs_to_many :statuses
 
