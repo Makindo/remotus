@@ -1,6 +1,7 @@
 class Status < ActiveRecord::Base
   include Remote::Data
   include Remote::External
+  include Remote::Provider
 
   belongs_to :profile
   has_and_belongs_to_many :searches
@@ -10,27 +11,31 @@ class Status < ActiveRecord::Base
   validates_with StatusValidator
 
   def self.nonbad
-    where { vote.eq(nil) | vote.eq(true) }
+    joins(:vote).where { id.not_in(Vote.pluck(:id)) | vote.value.eq(true) }
   end
 
   def self.neutral
-    where(vote: nil)
+    where { id.not_in(Vote.pluck(:id)) }
   end
 
   def self.good
-    where(vote: true)
+    joins(:vote).where { vote.value.eq(true) }
   end
 
   def self.bad
-    where(vote: false)
+    joins(:vote).where { vote.value.eq(false) }
   end
 
   def self.result
-    where { search_id.not_eq(nil) }
+    joins(:searches).where { searches_statuses.status_id.eq(statuses.id) }
   end
 
   def disliked?
-    !vote?
+    !vote.value? if vote.present?
+  end
+
+  def liked?
+    vote.value? if vote.present?
   end
 
   def fetch_data

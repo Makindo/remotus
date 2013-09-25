@@ -1,4 +1,6 @@
 class Search < ActiveRecord::Base
+  include Remote::Provider
+
   after_create :fetch_results
 
   has_and_belongs_to_many :statuses

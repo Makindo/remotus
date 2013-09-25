@@ -1,5 +1,6 @@
 class Geolocation < ActiveRecord::Base
   include Remote::Data
+  include Remote::Provider
 
   belongs_to :person, touch: true
   belongs_to :source, polymorphic: true

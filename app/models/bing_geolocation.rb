@@ -1,3 +1,3 @@
-class BingGeolocation < Location
-
+class BingGeolocation < Geolocation
+  PROVIDER = "bing"
 end
