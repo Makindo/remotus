@@ -13,7 +13,7 @@ class TwitterStatusDenormalizer < Remotus::Denormalizer
     coordinates["coordinates"].first
   end
 
-  def latitude
+  def longitude
     coordinates["coordinates"].last
   end
 
@@ -22,7 +22,7 @@ class TwitterStatusDenormalizer < Remotus::Denormalizer
       external_id: attributes.id_str,
       text: attributes.text,
       latitude: latitude,
-      longitude: latitude,
+      longitude: longitude,
       data: @data,
       type: "TwitterStatus"
     }
