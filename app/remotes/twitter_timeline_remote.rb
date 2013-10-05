@@ -1,5 +1,6 @@
 class TwitterTimelineRemote
   include Remotus::Remote
+  include Remotus::Twitter
 
   SEARCH_OPTIONS = {
     count: ENV["TWITTER_TIMELINE_COUNT"].to_i,
@@ -9,7 +10,7 @@ class TwitterTimelineRemote
 
   def initialize(query)
     begin
-      @timeline = Twitter.user_timeline(query.to_i, SEARCH_OPTIONS)
+      @timeline = client.user_timeline(query.to_i, SEARCH_OPTIONS)
     rescue Twitter::Error::NotFound, Twitter::Error::Forbidden
       warn("Twitter Status ##{query} can't be accessed.")
       REDIS.sadd(self.class, query)

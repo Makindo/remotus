@@ -20,11 +20,4 @@ VCR.configure do |config|
   config.configure_rspec_metadata!
 end
 
-Twitter.configure do |config|
-  config.consumer_key = "bbUHiFMjFhOkhial9izPg"
-  config.consumer_secret = "ZkQwJbOMohFJF7tZqQLhvtLuju7DPgzhOn0Rdz3xiw"
-  config.oauth_token = "55137522-Q1ihDmuaxkdYKxQaAjaQ8Z6ljo3lUPLP9gLhZo7Q1"
-  config.oauth_token_secret = "Tt7YtdPft8PgyDH2E2KwFrU6MEInj6mCLreh1q43w"
-end
-
 REDIS = MockRedis.new
