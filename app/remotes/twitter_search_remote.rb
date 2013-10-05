@@ -1,5 +1,5 @@
 class TwitterSearchRemote
-  include Remote::Remote
+  include Remotus::Remote
 
   SEARCH_OPTIONS = {
     count: ENV["TWITTER_SEARCH_COUNT"].to_i,

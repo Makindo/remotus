@@ -1,4 +1,4 @@
-module Remote
+module Remotus
   class Denormalizer
     private
 

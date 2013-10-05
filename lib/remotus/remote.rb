@@ -1,4 +1,4 @@
-module Remote
+module Remotus
   module Remote
     private
 
@@ -7,3 +7,5 @@ module Remote
     end
   end
 end
+
+require_relative "remote/twitter"

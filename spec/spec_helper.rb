@@ -12,7 +12,7 @@ require "rspec"
 require "vcr"
 require "webmock/rspec"
 require "mock_redis"
-require "remote"
+require "remotus"
 
 VCR.configure do |config|
   config.cassette_library_dir = "spec/fixtures/cassettes"
