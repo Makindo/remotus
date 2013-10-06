@@ -1,4 +1,4 @@
-class TwitterStatusDenormalizer < Remote::Denormalizer
+class TwitterStatusDenormalizer < Remotus::Denormalizer
   KEYS = [:id_str, :text, :coordinates]
 
   def initialize(status)

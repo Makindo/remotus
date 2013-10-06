@@ -1,4 +1,4 @@
-module Remote
+module Remotus
   module Provider
     def provider
       self.class.const_get("PROVIDER")

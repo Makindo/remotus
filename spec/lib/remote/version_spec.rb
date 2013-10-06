@@ -1,7 +1,7 @@
 require "spec_helper"
 
-describe Remote::VERSION do
+describe Remotus::VERSION do
   it "should be a string" do
-    expect(Remote::VERSION).to be_kind_of(String)
+    expect(Remotus::VERSION).to be_kind_of(String)
   end
 end

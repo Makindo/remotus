@@ -1,4 +1,4 @@
-module Remote
+module Remotus
   module Data
     extend ActiveSupport::Concern
 

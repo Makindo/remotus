@@ -1,7 +1,7 @@
 class Profile < ActiveRecord::Base
-  include Remote::Data
-  include Remote::External
-  include Remote::Provider
+  include Remotus::Data
+  include Remotus::External
+  include Remotus::Provider
 
   has_many :statuses, dependent: :destroy
   has_one :geolocation, as: :source
