@@ -1,5 +1,6 @@
 class TwitterSearchRemote
   include Remotus::Remote
+  include Remotus::Twitter
 
   SEARCH_OPTIONS = {
     count: ENV["TWITTER_SEARCH_COUNT"].to_i,
@@ -9,8 +10,9 @@ class TwitterSearchRemote
 
   def initialize(query, max = nil)
     @options = SEARCH_OPTIONS.merge(max_id: max) if max
+
     begin
-      @results = Twitter.search(query, @options || SEARCH_OPTIONS).results
+      @results = client.search(query, @options || SEARCH_OPTIONS).results
     rescue Twitter::Error::Unauthorized
       warn("Twitter client unauthorized.")
     rescue Twitter::Error::TooManyRequests => error
