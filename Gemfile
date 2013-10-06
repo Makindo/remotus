@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 source "https://rubygems.org/"
 
-# Specify your gem"s dependencies in remote.gemspec
+# Specify your gem"s dependencies in remotus.gemspec
 gemspec
 
 group :development, :test do

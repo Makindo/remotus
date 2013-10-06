@@ -1,7 +1,7 @@
 class Status < ActiveRecord::Base
-  include Remote::Data
-  include Remote::External
-  include Remote::Provider
+  include Remotus::Data
+  include Remotus::External
+  include Remotus::Provider
 
   belongs_to :profile
   has_and_belongs_to_many :searches

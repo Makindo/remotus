@@ -1,5 +1,5 @@
 class TwitterStatusRemote
-  include Remote::Remote
+  include Remotus::Remote
 
   def initialize(query)
     begin

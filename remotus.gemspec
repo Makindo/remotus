@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "remote/version"
+require "remotus/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "remote"
-  spec.version       = Remote::VERSION
+  spec.name          = "remotus"
+  spec.version       = Remotus::VERSION
   spec.authors       = ["Kurtis Rainbolt-Greene"]
   spec.email         = ["me@kurtisrainboltgreene.name"]
   spec.summary       = %q{The remote library for BlueBird}
   spec.description   = spec.summary
-  spec.homepage      = "http://makindo.github.com/remote"
+  spec.homepage      = "http://makindo.github.com/remotus"
   spec.license       = "MIT"
 
   spec.files         = Dir["{app,config,db,lib}/**/*"]

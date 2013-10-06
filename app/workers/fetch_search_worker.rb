@@ -1,6 +1,6 @@
 class FetchSearchWorker
   include Sidekiq::Worker
-  include Remote::Worker::Fetcher
+  include Remotus::Worker::Fetcher
 
   sidekiq_options queue: :searches
 

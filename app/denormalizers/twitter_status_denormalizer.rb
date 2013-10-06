@@ -1,4 +1,4 @@
-class TwitterStatusDenormalizer < Remote::Denormalizer
+class TwitterStatusDenormalizer < Remotus::Denormalizer
   KEYS = [:id_str, :text, :coordinates]
 
   def initialize(status)
@@ -13,7 +13,7 @@ class TwitterStatusDenormalizer < Remote::Denormalizer
     coordinates["coordinates"].first
   end
 
-  def latitude
+  def longitude
     coordinates["coordinates"].last
   end
 
@@ -22,7 +22,7 @@ class TwitterStatusDenormalizer < Remote::Denormalizer
       external_id: attributes.id_str,
       text: attributes.text,
       latitude: latitude,
-      longitude: latitude,
+      longitude: longitude,
       data: @data,
       type: "TwitterStatus"
     }
