@@ -1,9 +1,10 @@
 class TwitterStatusRemote
-  include Remote::Remote
+  include Remotus::Remote
+  include Remotus::Twitter
 
   def initialize(query)
     begin
-      @status = Twitter.status(query.to_i)
+      @status = client.status(query.to_i)
     rescue Twitter::Error::NotFound, Twitter::Error::Forbidden
       REDIS.sadd(self.class, query)
       warn("Twitter Status ##{query} can't be accessed.")

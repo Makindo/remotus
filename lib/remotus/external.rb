@@ -1,4 +1,4 @@
-module Remote
+module Remotus
   module External
     extend ActiveSupport::Concern
 
