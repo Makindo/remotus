@@ -1,5 +1,5 @@
 class Search < ActiveRecord::Base
-  include Remote::Provider
+  include Remotus::Provider
 
   after_create :fetch_results
 
