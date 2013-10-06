@@ -1,11 +1,11 @@
-Remote
+remotus
 -------
 
-  - [![Gem Version](https://badge.fury.io/rb/remote.png)](https://rubygems.org/gems/remote)
-  - [![Code Climate](https://codeclimate.com/github/krainboltgreene/remote.png)](https://codeclimate.com/github/krainboltgreene/remote)
-  - [![Build Status](https://travis-ci.org/krainboltgreene/remote.png)](https://travis-ci.org/krainboltgreene/remote)
-  - [![Dependency Status](https://gemnasium.com/krainboltgreene/remote.png)](https://gemnasium.com/krainboltgreene/remote)
-  - [![Coverage Status](https://coveralls.io/repos/krainboltgreene/remote/badge.png?branch=master)](https://coveralls.io/r/krainboltgreene/remote)
+  - [![Gem Version](https://badge.fury.io/rb/remotus.png)](https://rubygems.org/gems/remotus)
+  - [![Code Climate](https://codeclimate.com/github/krainboltgreene/remotus.png)](https://codeclimate.com/github/krainboltgreene/remotus)
+  - [![Build Status](https://travis-ci.org/krainboltgreene/remotus.png)](https://travis-ci.org/krainboltgreene/remotus)
+  - [![Dependency Status](https://gemnasium.com/krainboltgreene/remotus.png)](https://gemnasium.com/krainboltgreene/remotus)
+  - [![Coverage Status](https://coveralls.io/repos/krainboltgreene/remotus/badge.png?branch=master)](https://coveralls.io/r/krainboltgreene/remotus)
 
 
 TODO: Write a gem description
@@ -22,7 +22,7 @@ Installing
 
 Add this line to your application's Gemfile:
 
-    gem "remote"
+    gem "remotus"
 
 And then execute:
 
@@ -30,7 +30,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install remote
+    $ gem install remotus
 
 
 Contributing

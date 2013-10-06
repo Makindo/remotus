@@ -1,4 +1,4 @@
-class TwitterProfileDenormalizer < Remote::Denormalizer
+class TwitterProfileDenormalizer < Remotus::Denormalizer
   KEYS = [:id_str, :name, :screen_name, :location]
 
   def initialize(profile)
