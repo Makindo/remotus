@@ -1,4 +1,4 @@
-class FetchStatusDataWorker
+class FetchStatusWorker
   include Sidekiq::Worker
   include Remotus::Worker::Fetcher
 
