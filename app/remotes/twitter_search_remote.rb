@@ -1,18 +1,28 @@
 class TwitterSearchRemote
   include Remotus::Remote
-  include Remotus::Twitter
+  include Remotus::RemoteTwitter
 
   SEARCH_OPTIONS = {
     count: ENV["TWITTER_SEARCH_COUNT"].to_i,
-    geocode: "39.8,-95.583068847656,2500km",
     include_entities: false
   }
 
-  def initialize(query, max = nil)
+  def initialize(query, search_geolocation_id = nil, max = nil)
+    @client = Remotus::RemoteTwitter.client
     @options = SEARCH_OPTIONS.merge(max_id: max) if max
 
+    unless search_geolocation_id.blank?
+      @geolocation = Geolocation.find(search_geolocation_id)
+      @georadius = ENV['SEARCH_RADIUS']
+    else
+      @geolocation.longitude = 39.8
+      @geolocation.latitude = -95.583068847656
+      @georadius = 2500
+    end
+    SEARCH_OPTIONS.merge(geocode: "#{@geolocation.longitude},#{@geolocation.latitude},#{@georadius}km")
+
     begin
-      @results = client.search(query, @options || SEARCH_OPTIONS).results
+      @results = @client.search(query, @options || SEARCH_OPTIONS).results
     rescue Twitter::Error::Unauthorized
       warn("Twitter client unauthorized.")
     rescue Twitter::Error::TooManyRequests => error

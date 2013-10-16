@@ -11,4 +11,8 @@ class Search < ActiveRecord::Base
   def fetch_results
     FetchSearchWorker.perform_async(id)
   end
+
+  def geolocations
+    Geolocation.where(source_type: "search", source_id: self.id)
+  end
 end

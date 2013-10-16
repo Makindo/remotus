@@ -6,13 +6,19 @@ class FetchSearchWorker
 
   def perform(id)
     @resource = Search.find(id)
-    records.save
+    unless @resource.geolocations.blank?
+      @resource.geolocations.each do |geolocation|
+        records(geolocation.id).save
+      end
+    else
+      records.save
+    end
   end
 
   private
 
-  def records
-    form_class.new(@resource, remote_class.new(@resource.query).records)
+  def records(geolocation_id = nil)
+    form_class.new(@resource, remote_class.new(@resource.query, geolocation_id).records)
   end
 
   def form_class

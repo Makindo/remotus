@@ -6,6 +6,6 @@ class FetchGeolocationWorker
 
   def perform(id)
     @resource = Geolocation.find(id)
-    @resource.update_attributes(remote_class.new(@resource.external_id).record)
+    @resource.update_attributes(remote_class.new(@resource.id).record)
   end
 end
