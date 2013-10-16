@@ -9,6 +9,7 @@ class TwitterProfileRemote
   }
 
   def initialize(query)
+    client = Remotus::RemoteTwitter.client
     begin
       @profile = client.user(query.to_i, SEARCH_OPTIONS)
     rescue Twitter::Error::NotFound, Twitter::Error::Forbidden

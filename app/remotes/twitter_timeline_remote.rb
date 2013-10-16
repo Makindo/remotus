@@ -1,6 +1,6 @@
 class TwitterTimelineRemote
   include Remotus::Remote
-  include Remotus::Twitter
+  include Remotus::RemoteTwitter
 
   SEARCH_OPTIONS = {
     count: ENV["TWITTER_TIMELINE_COUNT"].to_i,
@@ -9,6 +9,7 @@ class TwitterTimelineRemote
   }
 
   def initialize(query)
+    client = Remotus::RemoteTwitter.client
     begin
       @timeline = client.user_timeline(query.to_i, SEARCH_OPTIONS)
     rescue Twitter::Error::NotFound, Twitter::Error::Forbidden
