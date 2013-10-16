@@ -1,6 +1,6 @@
 class TwitterProfileRemote
   include Remotus::Remote
-  include Remotus::Twitter
+  include Remotus::RemoteTwitter
 
   SEARCH_OPTIONS = {
     count: ENV["TWITTER_TIMELINE_COUNT"].to_i,
