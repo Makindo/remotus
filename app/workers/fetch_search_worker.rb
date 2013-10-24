@@ -6,12 +6,14 @@ class FetchSearchWorker
 
   def perform(id)
     @resource = Search.find(id)
-    unless @resource.geolocations.blank?
-      @resource.geolocations.each do |geolocation|
-        records(geolocation.id).save
+    if @resource.active?
+      unless @resource.geolocations.blank?
+        @resource.geolocations.each do |geolocation|
+          records(geolocation.id).save
+        end
+      else
+        records.save
       end
-    else
-      records.save
     end
   end
 
