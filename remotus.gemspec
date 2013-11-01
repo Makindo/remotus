@@ -6,7 +6,7 @@ require "remotus/version"
 Gem::Specification.new do |spec|
   spec.name          = "remotus"
   spec.version       = Remotus::VERSION
-  spec.authors       = ["Kurtis Rainbolt-Greene"]
+  spec.authors       = ["Kurtis Rainbolt-Greene", "Tyler Morgan"]
   spec.email         = ["me@kurtisrainboltgreene.name"]
   spec.summary       = %q{The remote library for BlueBird}
   spec.description   = spec.summary
