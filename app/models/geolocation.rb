@@ -24,4 +24,15 @@ class Geolocation < ActiveRecord::Base
   def fetch_data
     FetchGeolocationWorker.perform_async(id)
   end
+
+  def update_from_geocoder_result(result)
+    self.city = result.city
+    self.state = result.state
+    self.latitude = result.latitude
+    self.longitude = result.longitude
+    self.country = result.country
+    self.zip = result.postal_code
+    self.data = result
+    result.present?
+  end
 end
