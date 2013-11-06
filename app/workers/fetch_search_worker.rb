@@ -17,6 +17,7 @@ class FetchSearchWorker
         records.each do |record|
           record.save if record.valid?
         end
+      end
     end
   end
 
