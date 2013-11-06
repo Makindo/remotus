@@ -3,13 +3,20 @@ class TwitterSearchResultsForm
   attr_reader :statuses
   attr_reader :profiles
 
-  def initialize(search, results)
+  def initialize(search, results, geolocation_id = nil)
+    unless geolocation_id.blank?
+      search_geolocation = Geolocation.find(geolocation_id)
+      @geolocation = Geolocation.clone_geo(search_geolocation)
+    end
     @search = search
     @statuses = results.map do |result|
       TwitterStatus.new(result[:status]).tap do |status|
         status.searches << @search
         status.profile = TwitterProfile.new(result[:profile])
         status.profile.statuses << status
+        unless @geolocation.blank?
+          status.profile.geolocations << @geolocation
+        end
       end
     end
 
@@ -28,21 +35,19 @@ class TwitterSearchResultsForm
     @profiles.each do |profile|
       begin
         profile.save
+        profile.geolocations.each do |geo|
+          geo.save if geo.valid?
+        end
       rescue ActiveRecord::RecordNotUnique
         original = Profile.where(profile.attributes.slice(:external_id, :type)).first
         status = profile.statuses.first
         status.profile = original
-        Rails.logger.debug(profile.attributes)
-        Rails.logger.warn("Profile wasn't unique")
       end
     end
 
     @statuses.each do |status|
       begin
-        status.save
-      rescue ActiveRecord::RecordNotUnique
-        Rails.logger.debug(status.attributes)
-        Rails.logger.warn("Status wasn't unique")
+        status.save if status.valid?
       end
     end
     @search.save

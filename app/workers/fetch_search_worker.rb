@@ -20,7 +20,7 @@ class FetchSearchWorker
   private
 
   def records(geolocation_id = nil)
-    form_class.new(@resource, remote_class.new(@resource.query, geolocation_id).records)
+    form_class.new(@resource, remote_class.new(@resource.query, geolocation_id).records, geolocation_id)
   end
 
   def form_class

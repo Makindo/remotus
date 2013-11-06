@@ -40,4 +40,3 @@ class TwitterSearchRemote
     @results.map { |status| TwitterSearchDenormalizer.new(status).to_hash }
   end
 end
-

@@ -21,8 +21,18 @@ class Geolocation < ActiveRecord::Base
     where { state.not_eq(nil) | (zip.not_eq(nil) | country.not_eq(nil)) }
   end
 
+  def self.clone_geo(geolocation)
+    new_geo = Geolocation.new
+    new_geo.update_from_geocoder_result(geolocation)
+    new_geo
+  end
+
   def fetch_data
     FetchGeolocationWorker.perform_async(id)
+  end
+
+  def postal_code
+    zip
   end
 
   def update_from_geocoder_result(result)
@@ -32,7 +42,7 @@ class Geolocation < ActiveRecord::Base
     self.longitude = result.longitude
     self.country = result.country
     self.zip = result.postal_code
-    self.data = result
+    self.data = result.data || result
     result.present?
   end
 end

@@ -4,7 +4,7 @@ class Profile < ActiveRecord::Base
   include Remotus::Provider
 
   has_many :statuses, dependent: :destroy
-  has_one :geolocation, as: :source
+  has_many :geolocations, as: :source
 
   validates_with ProfileValidator
 
