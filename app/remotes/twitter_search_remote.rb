@@ -13,13 +13,15 @@ class TwitterSearchRemote
 
     unless search_geolocation_id.blank?
       @geolocation = Geolocation.find(search_geolocation_id)
+      @longitude = @geolocation.longitude
+      @latitude = @getolocation.latitude
       @georadius = ENV['SEARCH_RADIUS']
     else
-      @geolocation.longitude = 39.8
-      @geolocation.latitude = -95.583068847656
+      @longitude = 39.8
+      @latitude = -95.583068847656
       @georadius = 2500
     end
-    SEARCH_OPTIONS.merge(geocode: "#{@geolocation.longitude},#{@geolocation.latitude},#{@georadius}km")
+    SEARCH_OPTIONS.merge(geocode: "#{@longitude},#{@latitude},#{@georadius}km")
 
     begin
       @results = @client.search(query, @options || SEARCH_OPTIONS).results
