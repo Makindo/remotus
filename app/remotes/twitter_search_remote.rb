@@ -14,7 +14,7 @@ class TwitterSearchRemote
     unless search_geolocation_id.blank?
       @geolocation = Geolocation.find(search_geolocation_id)
       @longitude = @geolocation.longitude
-      @latitude = @getolocation.latitude
+      @latitude = @geolocation.latitude
       @georadius = ENV['SEARCH_RADIUS']
     else
       @longitude = 39.8
