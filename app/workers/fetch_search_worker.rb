@@ -8,11 +8,9 @@ class FetchSearchWorker
     @resource = Search.find(id)
     if @resource.active?
       unless @resource.geolocations.blank?
-        @resource.geolocations.each do |geolocation|
+        @resource.geolocations.find_each do |geolocation|
           records(geolocation.id).save if records.valid?
         end
-      else
-        records.save if records.valid?
       end
     end
   end

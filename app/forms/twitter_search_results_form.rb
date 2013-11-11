@@ -15,6 +15,7 @@ class TwitterSearchResultsForm
         status.profile = TwitterProfile.new(result[:profile])
         status.profile.statuses << status
         unless @geolocation.blank?
+          @geolocation.type = "TwitterSearch"
           status.profile.geolocations << @geolocation
         end
       end

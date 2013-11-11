@@ -13,18 +13,16 @@ class TwitterSearchRemote
 
     unless search_geolocation_id.blank?
       @geolocation = Geolocation.find(search_geolocation_id)
-      @longitude = @geolocation.longitude
-      @latitude = @geolocation.latitude
       @georadius = ENV['SEARCH_RADIUS']
-    else
-      @longitude = 39.8
-      @latitude = -95.583068847656
-      @georadius = 2500
     end
-    SEARCH_OPTIONS.merge(geocode: "#{@longitude},#{@latitude},#{@georadius}km")
+    SEARCH_OPTIONS.merge(geocode: "#{@geolocation.longitude},#{@geolocation.latitude},#{@georadius}km") if @geolocation.present?
 
     begin
-      @results = @client.search(query, @options || SEARCH_OPTIONS).results
+      if @geolocation.present?
+        @results = @client.search(query, @options || SEARCH_OPTIONS).results
+      else
+        warn("No geolocation specified")
+      end
     rescue Twitter::Error::Unauthorized
       warn("Twitter client unauthorized.")
     rescue Twitter::Error::TooManyRequests => error
