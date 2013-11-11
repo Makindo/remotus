@@ -11,7 +11,10 @@ class TwitterProfileRemote
   def initialize(query)
     client = Remotus::RemoteTwitter.client
     begin
-      @profile = client.user(query.to_i, SEARCH_OPTIONS)
+      @profile = Profile.find_by_external_id(query.to_i)
+      if @profile.blank?
+        @profile = client.user(query.to_i, SEARCH_OPTIONS)
+      end
     rescue Twitter::Error::NotFound, Twitter::Error::Forbidden
       REDIS.sadd(self.class, query)
       warn("Twitter Status ##{query} can't be accessed.")
