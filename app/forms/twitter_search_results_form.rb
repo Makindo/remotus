@@ -6,7 +6,7 @@ class TwitterSearchResultsForm
   def initialize(search, results, geolocation_id = nil)
     unless geolocation_id.blank?
       search_geolocation = Geolocation.find(geolocation_id)
-      @geolocation = Geolocation.clone_geo(search_geolocation)
+      @geolocation = TwitterSearchLocation.clone_geo(search_geolocation)
     end
     @search = search
     @statuses = results.map do |result|
@@ -15,7 +15,6 @@ class TwitterSearchResultsForm
         status.profile = TwitterProfile.new(result[:profile])
         status.profile.statuses << status
         unless @geolocation.blank?
-          @geolocation.type = "TwitterSearch"
           status.profile.geolocations << @geolocation
         end
       end

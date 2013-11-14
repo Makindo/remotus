@@ -6,7 +6,7 @@ class FetchSearchWorker
 
   def perform(id)
     @resource = Search.find(id)
-    if @resource.active?
+    if @resource.present? &&  @resource.active?
       unless @resource.geolocations.blank?
         @resource.geolocations.find_each do |geolocation|
           records(geolocation.id).save if records.valid?
