@@ -2,7 +2,7 @@ class FetchProfileDataWorker
   include Sidekiq::Worker
   include Remotus::Worker::Fetcher
 
-  sidekiq_options queue: :profiles
+  sidekiq_options queue: :profiles, retry: 2
 
   def perform(id)
     @resource = Profile.find(id)

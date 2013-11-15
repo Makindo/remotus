@@ -2,7 +2,7 @@ class FetchSearchWorker
   include Sidekiq::Worker
   include Remotus::Worker::Fetcher
 
-  sidekiq_options queue: :searches
+  sidekiq_options queue: :searches, retry: 2
 
   def perform(id)
     @resource = Search.find(id)
