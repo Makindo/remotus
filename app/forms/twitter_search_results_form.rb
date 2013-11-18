@@ -35,7 +35,7 @@ class TwitterSearchResultsForm
   def save
     @profiles.each do |profile|
       begin
-        profile.save
+        profile.save if profile.valid?
         profile.geolocations.each do |geo|
           geo.save if geo.valid?
         end
