@@ -9,13 +9,13 @@ class TwitterSearchRemote
 
   def initialize(query, search_geolocation_id = nil, max = nil)
     @client = Remotus::RemoteTwitter.client
-    @options = SEARCH_OPTIONS.merge(max_id: max) if max
 
     unless search_geolocation_id.blank?
       @geolocation = Geolocation.find(search_geolocation_id)
       @georadius = ENV['SEARCH_RADIUS']
     end
     SEARCH_OPTIONS.merge(geocode: "#{@geolocation.latitude},#{@geolocation.longitude},#{@georadius}km") if @geolocation.present?
+    @options = SEARCH_OPTIONS.merge(max_id: max) if max
 
     begin
       if @geolocation.present?
