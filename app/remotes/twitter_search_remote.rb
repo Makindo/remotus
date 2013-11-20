@@ -15,7 +15,7 @@ class TwitterSearchRemote
       @geolocation = Geolocation.find(search_geolocation_id)
       @georadius = ENV['SEARCH_RADIUS']
     end
-    SEARCH_OPTIONS.merge(geocode: "#{@geolocation.longitude},#{@geolocation.latitude},#{@georadius}km") if @geolocation.present?
+    SEARCH_OPTIONS.merge(geocode: "#{@geolocation.latitude},#{@geolocation.longitude},#{@georadius}km") if @geolocation.present?
 
     begin
       if @geolocation.present?
