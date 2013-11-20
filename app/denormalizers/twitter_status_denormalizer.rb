@@ -10,11 +10,11 @@ class TwitterStatusDenormalizer < Remotus::Denormalizer
   end
 
   def latitude
-    coordinates["coordinates"].first
+    coordinates["coordinates"].last
   end
 
   def longitude
-    coordinates["coordinates"].last
+    coordinates["coordinates"].first
   end
 
   def to_hash
