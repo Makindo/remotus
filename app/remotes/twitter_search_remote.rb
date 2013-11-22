@@ -20,7 +20,7 @@ class TwitterSearchRemote
     begin
       if @geolocation.present?
         @results = @client.search(query, @options || SEARCH_OPTIONS).results
-        warn("Search Query: #{query}, options: #{@options}")
+        warn("Search Query: #{query}, options: #{@options}, geocoded city: #{@geolocation.city}")
       else
         warn("No geolocation specified")
       end
