@@ -7,6 +7,7 @@ class Status < ActiveRecord::Base
   has_and_belongs_to_many :searches
   has_one :geolocation
   has_one :vote
+  accepts_nested_attributes_for :vote
 
   validates_with StatusValidator
 
@@ -48,6 +49,14 @@ class Status < ActiveRecord::Base
 
   def to_geolocation
     GeolocationFacade.new([latitude, longitude]).geolocation
+  end
+
+  def like
+    if vote then vote.update_attribute(:value, true) else create_vote(value: true) end
+  end
+
+  def dislike
+    if vote then vote.update_attribute(:value, false) else create_vote(value: false) end
   end
 
   private
