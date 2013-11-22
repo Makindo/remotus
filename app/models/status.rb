@@ -8,6 +8,7 @@ class Status < ActiveRecord::Base
   has_one :geolocation
   has_one :vote
   accepts_nested_attributes_for :vote
+  after_save :build_vote
 
   validates_with StatusValidator
 
@@ -65,5 +66,9 @@ class Status < ActiveRecord::Base
     if profile.person.present? && has_location?
       FetchGeolocationWorker.perform_async(id)
     end
+  end
+
+  def build_vote
+    vote.build if new_record?
   end
 end
