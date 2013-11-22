@@ -69,6 +69,7 @@ class Status < ActiveRecord::Base
   end
 
   def build_vote
-    vote.build if new_record? && searches.present?
+    @vote = build_vote if new_record? && searches.present?
+    @vote.save if @vote.present?
   end
 end
