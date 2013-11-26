@@ -60,16 +60,16 @@ class Status < ActiveRecord::Base
     if vote then vote.update_attribute(:value, false) else create_vote(value: false) end
   end
 
+  def build_vote
+    vote = Vote.new(status_id: self.id) if vote.blank?
+    vote.save if vote.present?
+  end
+
   private
 
   def generate_geolocation
     if profile.person.present? && has_location?
       FetchGeolocationWorker.perform_async(id)
     end
-  end
-
-  def build_vote
-    vote = Vote.new(status_id: self.id) if vote.blank?
-    vote.save if vote.present?
   end
 end
