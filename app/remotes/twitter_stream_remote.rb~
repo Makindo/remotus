@@ -1,0 +1,6 @@
+class TwitterStreamRemote
+  include Remotus::Remote
+  include Remotus::RemoteTwitterStream
+
+  
+end

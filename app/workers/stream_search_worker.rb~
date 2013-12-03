@@ -1,0 +1,11 @@
+class StreamSearchWorker
+  include Sidekiq::Worker
+  
+  sidekiq_options queue: :twitter_stream
+
+  def perform(status_id)
+    @status = Status.find(status_id)
+    @queries = []
+    @queries = Search.map(&:query)
+ 
+end
