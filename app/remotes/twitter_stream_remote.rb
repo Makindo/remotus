@@ -8,9 +8,11 @@ class TwitterStreamRemote
     @queries.each { |query| @queries_words << query.split(' ') }
 
     @location_query = Array.new
-    @geolocations.where(type: "TwitterStreamLocation").map(|geo| @location_query << geo.longitude;
-                                                          @location_query << geo.latitude)
-    Remotus::RemoteTwitterStream.client.locations(location_query) do |status| 
+    Geolocation.where(type: "TwitterStreamLocation").pluck(:longitude, :latitude).each do |geo| 
+      @location_query << geo[0] - 1 << geo[1] -1 << geo[0] + 1 << geo[1] + 1 
+    end
+    
+    Remotus::RemoteTwitterStream.client.locations(@location_query) do |status| 
       SearchStreamWorker.perform_async(status.id) if match_search?(status.text)
     end
   end
