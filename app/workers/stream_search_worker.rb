@@ -9,4 +9,5 @@ class StreamSearchWorker
     
     @result = TwitterStreamResultsForm.new(@search, status)
     @result.save if @result.valid?
+  end
 end
