@@ -1,0 +1,12 @@
+class TwitterStreamResultsForm
+  attr_reader :search
+  attr_reader :statuses
+  attr_reader :profiles
+
+  def initialize(search, status)
+    @search = search
+    result = TwitterSearchDenormalizer.new(status).to_hash
+    
+    
+  end
+end

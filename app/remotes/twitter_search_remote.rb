@@ -16,7 +16,6 @@ class TwitterSearchRemote
     end
     @options = SEARCH_OPTIONS.merge(geocode: "#{@geolocation.latitude},#{@geolocation.longitude},#{@georadius}km") if @geolocation.present?
     @options = SEARCH_OPTIONS.merge(max_id: max) if max
-
     begin
       if @geolocation.present?
         @results = @client.search(query, @options || SEARCH_OPTIONS).results

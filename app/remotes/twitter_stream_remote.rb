@@ -22,7 +22,6 @@ class TwitterStreamRemote
     puts "starting with client with location query: #{@location_query}"
     Remotus::RemoteTwitterStream.client.locations(@location_query) do |status| 
       if match_search?(status.text)
-        puts "Sending to SearchStreamWoker"
         StreamSearchWorker.perform_async(status, match_search?(status.text)) 
       end
     end
@@ -31,22 +30,6 @@ class TwitterStreamRemote
   def daemon
     Remotus::RemoteTwitterStream.daemon.locations(@location_query) do |status| 
       StreamSearchWorker.perform_async(status, match_search?(status.text)) if match_search?(status.text)
-    end
-  end
-
-  def test_client
-    start_time = Time.now
-    status_count = 0
-    matched_status_count = 0
-    begin
-    puts "starting client with the following location query: #{@location_query}"
-    Remotus::RemoteTwitterStream.client.locations(@location_query) do |status| 
-      puts "#{status.text}"
-      status_count += 1
-      matched_status_count += 1 if match_search?(status.text)
-    end
-    ensure
-      puts "there were #{status_count} statuses and #{matched_status_count} matched in #{Time.now - start_time}"
     end
   end
 

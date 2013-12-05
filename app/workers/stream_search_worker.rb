@@ -5,6 +5,8 @@ class StreamSearchWorker
 
   #filtering and data creation to come
   def perform(status, search_id)
-    warn("search id: #{search_id} matched status: #{status["text"]}")
-  end
+    @search = Search.find(search_id)
+    
+    @result = TwitterStreamResultsForm.new(@search, status)
+    @result.save if @result.valid?
 end
