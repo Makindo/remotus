@@ -1,7 +1,7 @@
 class StreamSearchWorker
   include Sidekiq::Worker
 
-  sidekiq_options queue: :twitter_stream
+  sidekiq_options queue: :twitter_stream, backtrace: true
 
   #filtering and data creation to come
   def perform(status, search_id)
