@@ -31,3 +31,4 @@
 /spec/dummy/.sass-cache
 /log/*.log
 \#*
+.\#*
