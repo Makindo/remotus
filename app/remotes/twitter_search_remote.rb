@@ -6,7 +6,7 @@ class TwitterSearchRemote
     count: ENV["TWITTER_SEARCH_COUNT"].to_i,
     include_entities: false
   }
-n
+
   def initialize(query, search_geolocation_id = nil, max = nil)
     @client = Remotus::RemoteTwitter.client
 
