@@ -15,7 +15,7 @@ module Remotus
        config.oauth_token = ENV["TWITTER_ACCESS_KEY"]
        config.oauth_token_secret = ENV["TWITTER_ACCESS_SECRET"]
      end
-     TweetStream::Daemon.new('twitter_stream', {multiple: true, ontop: true })
+     TweetStream::Daemon.new('twitter_stream', :ontop => true)
     end
   end
 end
