@@ -2,7 +2,6 @@ class TwitterSearchResultsForm
   attr_reader :search
   attr_reader :statuses
   attr_reader :profiles
-
   def initialize(search, results, geolocation_id = nil)
     unless geolocation_id.blank?
       search_geolocation = Geolocation.find(geolocation_id)

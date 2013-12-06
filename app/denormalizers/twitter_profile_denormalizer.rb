@@ -7,10 +7,10 @@ class TwitterProfileDenormalizer < Remotus::Denormalizer
 
   def to_hash
     {
-      external_id: attributes.id_str,
-      name: attributes.name,
-      username: attributes.screen_name,
-      location: attributes.location,
+      external_id: @data["id_str"],
+      name: @data["name"],
+      username: @data["screen_name"],
+      location: @data["location"],
       data: @data,
       type: "TwitterProfile"
     }
