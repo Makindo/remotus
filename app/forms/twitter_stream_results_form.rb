@@ -9,7 +9,7 @@ class TwitterStreamResultsForm
     
     @status = TwitterStatus.new(result[:status])
     @status.searches << @search
-    @status.profile = TwitterProfile.first_or_create(result[:profile])
+    @status.profile = TwitterProfile.new(result[:profile])
     @status.profile.save
     @status.profile.statuses << @status
   end
