@@ -9,7 +9,7 @@ class TwitterStreamRemote
     @queries.each do |query| 
       @regexs[query[0]] = Regexp.new(query[1].gsub(/[a-z]+/, '(\&)').gsub(/ /, " (.*)").gsub(/^|$/, "(.*)"))
     end
-    puts "finished creating search queries"
+    puts "finished creating #{@regexs.size} search queries"
 
     @location_query = Array.new
     Geolocation.where(type: "TwitterStreamLocation").pluck(:longitude, :latitude).each do |geo| 
@@ -19,6 +19,7 @@ class TwitterStreamRemote
   end
 
   def client
+    puts "Starting stream with location query: #{@location_query}"
     Remotus::RemoteTwitterStream.client.locations(@location_query) do |status| 
       if match_search?(status.text)
         StreamSearchWorker.perform_async(status, match_search?(status.text)) 
