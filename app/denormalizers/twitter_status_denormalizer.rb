@@ -6,21 +6,21 @@ class TwitterStatusDenormalizer < Remotus::Denormalizer
   end
 
   def coordinates
-    @data["coordinates"] || { "coordinates" => [] }
+    @data[:coordinates] || { :coordinates => [] }
   end
 
   def latitude
-    coordinates["coordinates"].last
+    coordinates[:coordinates].last
   end
 
   def longitude
-    coordinates["coordinates"].first
+    coordinates[:coordinates].first
   end
 
   def to_hash
     {
-      external_id: @data["id_str"],
-      text: @data["text"],
+      external_id: @data[:id].to_s,
+      text: @data[:text],
       latitude: latitude,
       longitude: longitude,
       data: @data,
