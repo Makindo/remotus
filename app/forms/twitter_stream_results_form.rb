@@ -10,7 +10,7 @@ class TwitterStreamResultsForm
     @status = TwitterStatus.new(result[:status])
     @status.searches << @search
     @status.profile = TwitterProfile.new(result[:profile])
-    @status.profile.save
+    @profile = @status.profile
     @status.profile.statuses << @status
   end
 
@@ -19,7 +19,8 @@ class TwitterStreamResultsForm
   end
 
   def save
-    @status.profile.save 
+    @profile.save
+    @status.profile = @profile
     @status.save
   end
 end
