@@ -16,7 +16,7 @@ class StreamSearchWorker
       FetchPersonWorker.perform_async(@result.profile.id)
     else
       warn "StreamSearchWorker errors:"
-      @result.errors.each { |errors| errors.each_full { |msg| warn "#{msg}"  } }
+      @result.errors.each { |errors| errors.full_messages { |msg| warn "#{msg}"  } }
     end
   end
 end
