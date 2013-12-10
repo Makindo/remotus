@@ -3,6 +3,7 @@ class TwitterProfileDenormalizer < Remotus::Denormalizer
 
   def initialize(profile)
     @data = profile.to_hash
+    @data.symbolize_keys!
   end
 
   def to_hash

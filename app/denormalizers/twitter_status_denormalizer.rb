@@ -3,6 +3,7 @@ class TwitterStatusDenormalizer < Remotus::Denormalizer
 
   def initialize(status)
     @data = status.to_hash
+    @data.symbolize_keys!
   end
 
   def coordinates
