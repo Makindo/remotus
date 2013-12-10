@@ -19,7 +19,7 @@ class TwitterStreamResultsForm
   end
 
   def errors
-    @status.errors << @profile.errors << @search.errors
+    Array.new << @status.errors << @profile.errors << @search.errors
   end
 
   def save
