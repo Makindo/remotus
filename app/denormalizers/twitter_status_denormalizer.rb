@@ -8,7 +8,7 @@ class TwitterStatusDenormalizer < Remotus::Denormalizer
 
   def coordinates
     @data[:coordinates] || { :coordinates => [] }
-  endp
+  end
 
   def latitude
     coordinates[:coordinates].last
