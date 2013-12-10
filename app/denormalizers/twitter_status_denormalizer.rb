@@ -7,7 +7,7 @@ class TwitterStatusDenormalizer < Remotus::Denormalizer
   end
 
   def coordinates
-    @data[:coordinates] || { :coordinates => [] }
+    @data[:coordinates].symbolize_keys! || { "coordinates" => [] }
   end
 
   def latitude
