@@ -9,7 +9,7 @@ describe TwitterStreamResultsForm do
                                         name: "Test User",
                                         screen_name: "tester"
                                        })
-    @search = Search.new(query: "test")
+    @search = Search.new(type: "TwitterSearch", query: "test")
     @form = described_class.new(@search, @status)
   end
 
@@ -31,5 +31,10 @@ describe TwitterStreamResultsForm do
 
   it "should be saveable" do
     expect(@form).to respond_to(:save)
+  end
+
+  it "should be valid after save" do
+    @form.save
+    expect(@form).to be_valid
   end
 end

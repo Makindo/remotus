@@ -9,12 +9,10 @@ class TwitterStreamResultsForm
     
     @status = TwitterStatus.new(result[:status])
     @status.searches << @search
-    @status.profile = TwitterProfile.new(result[:profile])
+    @status.profile = TwitterProfile.first_or_create(external_id: result[:profile][:id]) do |profile| 
+      profile.update_attributes(result[:profile])
+    end
     @profile = @status.profile
-    @status.profile.statuses << @status
-    warn "initialized twitter results form with status: #{@status.inspect}"
-    warn "initialized twitter results form with profile: #{@profile.inspect}"
-    warn "valid? #{valid?}"
   end
 
   def valid?
@@ -26,8 +24,9 @@ class TwitterStreamResultsForm
   end
 
   def save
-    @profile.save
     @status.profile = @profile
+    @profile.statuses << @status
     @status.save
+    @profile.save
   end
 end

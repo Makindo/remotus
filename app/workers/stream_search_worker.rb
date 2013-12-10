@@ -10,9 +10,7 @@ class StreamSearchWorker
     @result = TwitterStreamResultsForm.new(@search, status)
     if @result.valid?
       @result.save
-      warn "Updating search_statuses_counts for search_id: #{@search.id}"
       UpdateSearchesStatusesCountWorker.perform_async(@search.id)
-      warn "Creating person for profile_id: #{@result.profile.id}"
       FetchPersonWorker.perform_async(@result.profile.id)
     else
       warn "StreamSearchWorker errors:"
