@@ -1,0 +1,11 @@
+require "spec_helper"
+
+ describe TwitterStatusDenormalizer do
+   before do
+     @status = Twitter::Tweet.new(id: 1, id_str: "1", text: "a tweet to test status denormalizer")
+     @denormalied_tweet = described_class.new(@status)
+   end
+
+   it "should be valid when given a "
+ end
+   

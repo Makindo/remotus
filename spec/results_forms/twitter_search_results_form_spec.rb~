@@ -1,0 +1,12 @@
+require "spec_helper"
+
+describe TwitterSearchResultsForm do
+  before do
+    (1..3).each do |number| 
+          @status = Twitter::Status.new(id: number, id_str: "#{number}", text: "a test tweet, number #{number}", 
+                                 user: {
+                                        id: number,
+                                        id_str: "#{number}",
+                                        name: "Test User #{number}",
+                                        screen_name: "tester_#{number}"
+                                       })
