@@ -18,6 +18,10 @@ class TwitterStreamResultsForm
     @search.valid? && @status.valid?
   end
 
+  def errors
+    @status.errors + @profile.errors + @search.errors
+  end
+
   def save
     @profile.save
     @status.profile = @profile

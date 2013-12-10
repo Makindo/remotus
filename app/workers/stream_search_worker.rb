@@ -16,6 +16,8 @@ class StreamSearchWorker
       UpdateSearchesStatusesCountWorker.perform_async(@search.id)
       warn "Creating person for profile_id: #{@result.profile.id}"
       FetchPersonWorker.perform_async(@result.profile.id)
+    else
+      warn "#{@result.errors}"
     end
   end
 end
