@@ -10,6 +10,10 @@ class StreamSearchWorker
     
     @result = TwitterStreamResultsForm.new(@search, status)
     warn("results form back")
-    @result.save if @result.valid?
+    if @result.valid?
+      @result.save
+      UpdateSearchesStatusesCountWorker.perform_async(@search.id)
+      FetchPersonWorker.perform_async(@result.profile.id)
+    end
   end
 end
