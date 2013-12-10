@@ -12,10 +12,13 @@ class TwitterStreamResultsForm
     @status.profile = TwitterProfile.new(result[:profile])
     @profile = @status.profile
     @status.profile.statuses << @status
+    warn "initialized twitter results form with status: #{@status.inspect}"
+    warn "initialized twitter results form with profile: #{@profile.inspect}"
+    warn "valid? #{valid?}"
   end
 
   def valid?
-    @search.valid? && @status.valid?
+    @status.valid? && @profile.valid?
   end
 
   def errors
