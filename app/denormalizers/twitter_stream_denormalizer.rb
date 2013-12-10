@@ -3,7 +3,7 @@ class TwitterStreamDenormalizer
 
   def initialize(result)
     @result = result.to_hash
-    @result.symbolize_keys!
+    @result.deep_symbolize_keys!
     warn "before profile is removed: #{@result.inspect}"
     @profile = TwitterProfileDenormalizer.new(@result.delete(:user) || {})
     warn "after profile is removed: #{@result.inspect}"
