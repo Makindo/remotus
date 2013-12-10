@@ -1,8 +1,8 @@
 class TwitterProfileDenormalizer < Remotus::Denormalizer
-  KEYS = [:id_str, :name, :screen_name, :location]
+  KEYS = [:id, :name, :screen_name, :location]
 
   def initialize(profile)
-    @data = profile.to_hash
+    @data = profile.to_hash || @data = {:id => nil, :screen_name => nil, :location => nil}
     @data.symbolize_keys!
   end
 

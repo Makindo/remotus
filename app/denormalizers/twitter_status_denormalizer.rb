@@ -1,14 +1,14 @@
 class TwitterStatusDenormalizer < Remotus::Denormalizer
-  KEYS = [:id_str, :text, :coordinates]
+  KEYS = [:id, :id_str, :text, :coordinates]
 
   def initialize(status)
-    @data = status.to_hash
+    @data = status.to_hash || {:id => nil, :text => nil, :coordinates => nil}
     @data.symbolize_keys!
   end
 
   def coordinates
     @data[:coordinates] || { :coordinates => [] }
-  end
+  endp
 
   def latitude
     coordinates[:coordinates].last

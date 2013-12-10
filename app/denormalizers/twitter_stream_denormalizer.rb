@@ -3,6 +3,7 @@ class TwitterStreamDenormalizer
 
   def initialize(result)
     @result = result.to_hash
+    @result.symbolize_keys!
     @profile = TwitterProfileDenormalizer.new(@result.delete(:user) || {})
     @status = TwitterStatusDenormalizer.new(@result)
   end
