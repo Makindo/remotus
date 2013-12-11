@@ -19,4 +19,8 @@ class Search < ActiveRecord::Base
   def to_regex
     Regexp.new(query.downcase.gsub(/[a-z]+/, '(\&)').gsub(/ /, " (.*)").gsub(/^|$/, "(.*)"))
   end
+
+  def query_regex
+    [id, to_regex]
+  end
 end
