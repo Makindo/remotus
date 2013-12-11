@@ -9,9 +9,7 @@ class TwitterStreamResultsForm
     
     @status = TwitterStatus.new(result[:status])
     @status.searches << @search
-    @status.profile = TwitterProfile.first_or_create(external_id: result[:profile][:id]) do |profile| 
-      profile.update_attributes(result[:profile])
-    end
+    @status.profile = TwitterProfile.new(result[:profile])
     @profile = @status.profile
   end
 
