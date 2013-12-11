@@ -4,11 +4,9 @@ class TwitterStreamRemote
 
   def initialize
     puts "Creating new stream remote"
-    @queries = Search.where(active: true).pluck(:id, :query.downcase)
+    @queries = Search.where(active: true).pluck(:id, :to_regex)
     @regexs = Hash.new
-    @queries.each do |query| 
-      @regexs[query[0]] = Regexp.new(query[1].gsub(/[a-z]+/, '(\&)').gsub(/ /, " (.*)").gsub(/^|$/, "(.*)"))
-    end
+
     puts "finished creating #{@regexs.size} search queries"
 
     @location_query = Array.new
