@@ -15,7 +15,7 @@ class TwitterStreamRemote
   def client
     Remotus::RemoteTwitterStream.client.locations(@location_query) do |status| 
       if match_search?(status.text)
-        warn "Starting stream with locatins: #{@location_query}"
+        warn "Starting stream with locations: #{@location_query}"
         StreamSearchWorker.perform_async(status, match_search?(status.text), @account_id) 
       end
     end
