@@ -4,7 +4,7 @@ class StreamSearchWorker
   sidekiq_options queue: :twitter_stream, backtrace: true
 
   #filtering and data creation to come
-  def perform(status, search_id)
+  def perform(status, search_id, account_id)
     @search = Search.find(search_id)
     
     @result = TwitterStreamResultsForm.new(@search, status)

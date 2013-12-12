@@ -2,29 +2,20 @@ class TwitterStreamRemote
   include Remotus::Remote
   include Remotus::RemoteTwitterStream
 
-  def initialize
-    puts "Creating new stream remote"
+  def initialize(location_query, account_id)
+    @location_query = location_query
+    @account_id = account_id
     @queries = Search.all.map(&:query_regex)
     @regexs = Hash.new
     @queries.each do |query| 
       @regexs[query[0]] = query[1]
     end
-    
-
-    puts "finished creating #{@regexs.size} search queries"
-
-    @location_query = Array.new
-    Geolocation.where(type: "TwitterStreamLocation").pluck(:longitude, :latitude).each do |geo| 
-      @location_query << geo[0] - 1 << geo[1] -1 << geo[0] + 1 << geo[1] + 1 
-    end
-    puts "finished creating location query"
   end
 
   def client
-    puts "Starting stream with location query: #{@location_query}"
     Remotus::RemoteTwitterStream.client.locations(@location_query) do |status| 
       if match_search?(status.text)
-        StreamSearchWorker.perform_async(status, match_search?(status.text)) 
+        StreamSearchWorker.perform_async(status, match_search?(status.text), @account_id) 
       end
     end
   end
