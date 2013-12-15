@@ -1,0 +1,8 @@
+module Remotus
+  module FacebookRemote
+    def self.client
+      @oauth = Koala::Facebook.Oauth.new(ENV["FACEBOOK_API_KEY"], ENV["FACEBOOK_API_SECRET"], )
+
+    end
+  end
+end

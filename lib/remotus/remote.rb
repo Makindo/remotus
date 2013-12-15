@@ -10,3 +10,4 @@ end
 
 require_relative "remote/twitter"
 require_relative "remote/twitter_stream"
+require_relative "remote/facebook"

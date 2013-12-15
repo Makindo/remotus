@@ -4,13 +4,13 @@ class TwitterStreamResultsForm
   attr_reader :profile
 
   def initialize(search, status)
-    @search = search
-    result = TwitterStreamDenormalizer.new(status).to_hash
+      @search = search
+      result = TwitterStreamDenormalizer.new(status).to_hash
     
-    @status = TwitterStatus.new(result[:status])
-    @status.searches << @search
-    @status.profile = TwitterProfile.new(result[:profile])
-    @profile = @status.profile
+      @status = TwitterStatus.new(result[:status])
+      @status.searches << @search
+      @status.profile = TwitterProfile.new(result[:profile])
+      @profile = @status.profile
   end
 
   def valid?
