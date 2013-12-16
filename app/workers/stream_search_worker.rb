@@ -17,7 +17,7 @@ class StreamSearchWorker
         warn "StreamSearchWorker errors:"
         @result.errors.each { |errors| errors.full_messages { |msg| warn "#{msg}"  } }
       end
-    rescue PG:UniqueViolation
+    rescue ActiveRecord::RecordNotUnique
       warn "external_id already exists in system."
     end
   end
