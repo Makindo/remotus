@@ -1,3 +1,3 @@
 module Remotus
-  VERSION = "1.4.35.6"
+  VERSION = "1.4.36"
 end
