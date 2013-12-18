@@ -3,6 +3,7 @@ class TwitterStreamRemote
   include Remotus::RemoteTwitterStream
 
   def initialize(location_query)
+    warn "new twitter stream remote"
     @location_query = location_query
     @queries = Search.where(active: true).map(&:query_regex)
     @regexs = Hash.new
