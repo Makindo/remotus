@@ -2,10 +2,9 @@ class TwitterStreamRemote
   include Remotus::Remote
   include Remotus::RemoteTwitterStream
 
-  def initialize(location_query, account_id)
+  def initialize(location_query)
     @location_query = location_query
-    @account_id = account_id
-    @queries = Search.all.map(&:query_regex)
+    @queries = Search.where(active: true).map(&:query_regex)
     @regexs = Hash.new
     @queries.each do |query| 
       @regexs[query[0]] = query[1]
@@ -14,9 +13,12 @@ class TwitterStreamRemote
 
   def client
     Remotus::RemoteTwitterStream.client.locations(@location_query) do |status| 
-      if match_search?(status.text)
-        warn "Starting stream with locations: #{@location_query}"
-        StreamSearchWorker.perform_async(status, match_search?(status.text), @account_id) 
+      warn "Starting stream with locations: #{@location_query}"
+      matched = match_searches(status.text)
+      unless matched.blank?
+        matched_searches.each do |search_id| 
+          StreamSearchWorker.perform_async(status, search_id)
+        end
       end
     end
   end
@@ -27,12 +29,13 @@ class TwitterStreamRemote
     end
   end
 
-  def match_search?(text)
+  def match_searches(text)
+    matching_regexs = []
     @regexs.each do |id, regex|
       if !!(text.match(regex))
-        return id
+        matching_regexs << id
       end
     end
-    false
+    matching_regexs
   end
 end

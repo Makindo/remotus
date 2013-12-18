@@ -10,6 +10,9 @@ class Status < ActiveRecord::Base
   accepts_nested_attributes_for :vote
   after_save :build_vote
 
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :geocode
+
   validates_with StatusValidator
 
   def self.nonbad

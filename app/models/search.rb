@@ -4,7 +4,7 @@ class Search < ActiveRecord::Base
   after_create :fetch_results
 
   has_and_belongs_to_many :statuses
-  has_and_belongs_to_many :accounts
+  belongs_to :account
 
   validates :query, uniqueness: true
   validates_with SearchValidator
