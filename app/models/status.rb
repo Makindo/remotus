@@ -35,6 +35,10 @@ class Status < ActiveRecord::Base
     joins(:searches).where { searches_statuses.status_id.eq(statuses.id) }
   end
 
+  def self.with_votes
+    joins(:vote).where("votes.rating is not null")
+  end
+
   def disliked?
     !vote.value? if vote.present?
   end
@@ -61,6 +65,11 @@ class Status < ActiveRecord::Base
 
   def dislike
     if vote then vote.update_attribute(:value, false) else create_vote(value: false) end
+  end
+
+  def rate(rating)
+    vote || vote = Vote.create(status_id: self.id)
+    vote.rate(rating)
   end
 
   def build_vote

@@ -10,4 +10,9 @@ class Vote < ActiveRecord::Base
   def self.bad
     where(value: false)
   end
+
+  def rate(value)
+    rate = value
+    self.save
+  end
 end

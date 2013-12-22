@@ -1,0 +1,4 @@
+class AddRatingToVotes < ActiveRecord::Migration
+  def change
+  end
+end

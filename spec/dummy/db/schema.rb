@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131001030015) do
+ActiveRecord::Schema.define(version: 20131220185352) do
 
   create_table "genders", force: true do |t|
     t.integer  "value"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20131001030015) do
     t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "radius",      default: 0
   end
 
   add_index "geolocations", ["city", "state", "country", "person_id"], name: "index_geolocations_on_city_and_state_and_country_and_person_id", unique: true
@@ -83,8 +84,10 @@ ActiveRecord::Schema.define(version: 20131001030015) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active",     default: true
+    t.integer  "account_id"
   end
 
+  add_index "searches", ["account_id"], name: "index_searches_on_account_id"
   add_index "searches", ["query", "type"], name: "index_searches_on_query_and_type", unique: true
 
   create_table "searches_statuses", id: false, force: true do |t|
@@ -118,6 +121,7 @@ ActiveRecord::Schema.define(version: 20131001030015) do
     t.datetime "updated_at"
     t.integer  "search_id"
     t.integer  "account_id"
+    t.integer  "rating"
   end
 
   add_index "votes", ["search_id", "status_id", "account_id"], name: "index_votes_on_search_id_and_status_id_and_account_id", unique: true

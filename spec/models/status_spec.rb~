@@ -1,0 +1,11 @@
+require "spec_helper"
+
+describe Status do
+  before do
+    @status1 = Status.new(external_id: 3, text = "a test status")
+    @status1.vote(3)
+    @status1.save
+    
+    @status2 = Status.new(external_id: 5, text = "a second test status")
+    @status2.save
+end
