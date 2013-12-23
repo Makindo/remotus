@@ -67,6 +67,10 @@ class Status < ActiveRecord::Base
     if vote then vote.update_attribute(:value, false) else create_vote(value: false) end
   end
 
+  def rating
+    vote.rating
+  end
+
   def rate(rating)
     vote || vote = Vote.create(status_id: self.id)
     vote.rate(rating)
