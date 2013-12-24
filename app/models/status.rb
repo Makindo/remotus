@@ -80,6 +80,11 @@ class Status < ActiveRecord::Base
     vote = Vote.new(status_id: self.id) if vote.blank?
     vote.save if vote.present?
   end
+  
+  def save
+    vote.save if vote.present?
+    super
+  end
 
   private
 
