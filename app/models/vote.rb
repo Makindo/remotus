@@ -12,7 +12,7 @@ class Vote < ActiveRecord::Base
   end
 
   def rate(value)
-    rate = value
+    rating = value
     self.save
   end
 end
