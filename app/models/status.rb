@@ -7,7 +7,7 @@ class Status < ActiveRecord::Base
   has_and_belongs_to_many :searches
   has_one :geolocation
   has_one :vote
-  accepts_nested_attributes_for :votes
+  accepts_nested_attributes_for :vote
   before_save :save_vote
   after_save :build_vote
 
