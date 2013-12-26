@@ -7,7 +7,8 @@ class Status < ActiveRecord::Base
   has_and_belongs_to_many :searches
   has_one :geolocation
   has_one :vote
-  accepts_nested_attributes_for :vote
+  accepts_nested_attributes_for :votes
+  before_save :save_vote
   after_save :build_vote
 
   reverse_geocoded_by :latitude, :longitude
@@ -81,16 +82,15 @@ class Status < ActiveRecord::Base
     vote.save if vote.present?
   end
   
-  def save
-    vote.save if vote.present?
-    super
-  end
-
   private
 
   def generate_geolocation
     if profile.person.present? && has_location?
       FetchGeolocationWorker.perform_async(id)
     end
+  end
+
+  def save_vote
+    vote.save if vote.present?
   end
 end
