@@ -72,7 +72,7 @@ class Status < ActiveRecord::Base
   end
 
   def rate(rating)
-    vote || vote = Vote.create(status_id: self.id)
+    vote || build_vote
     vote.rate(rating)
   end
 
