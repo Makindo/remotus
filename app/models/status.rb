@@ -40,6 +40,10 @@ class Status < ActiveRecord::Base
     joins(:vote).where("votes.rating is not null")
   end
 
+  def self.needs_review
+    self.with_votes.where("votes.value = false")
+  end
+
   def disliked?
     !vote.value? if vote.present?
   end
