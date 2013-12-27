@@ -41,7 +41,7 @@ class Status < ActiveRecord::Base
   end
 
   def self.needs_review
-    self.with_votes.where("votes.value = false")
+    joins(:vote).where("votes.rating is not null and votes.value = false")
   end
 
   def disliked?
