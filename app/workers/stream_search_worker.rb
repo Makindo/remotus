@@ -22,6 +22,7 @@ class StreamSearchWorker
         @result.save
         UpdateSearchesStatusesCountWorker.perform_async(@search.id)
         FetchPersonWorker.perform_async(@result.profile.id, @account.id)
+        ScoreStatusWorker.perform_async(@result.status.id)
       else
         warn "StreamSearchWorker errors:"
         @result.errors.each { |errors| errors.full_messages { |msg| warn "#{msg}"  } }
