@@ -11,6 +11,9 @@ class StreamSearchWorker
     
       @result = TwitterStreamResultsForm.new(@search, status)
       @result.status.geocode
+
+      raise "result status could not be saved" if @result.status.blank?
+
       has_a_close_geolocation = catch(:close_enough) do
         @account.geolocations.each do |geo| 
           if @result.status.distance_to(geo.city) < geo.radius
