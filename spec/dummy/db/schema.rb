@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131220185352) do
+ActiveRecord::Schema.define(version: 20131231183750) do
 
   create_table "genders", force: true do |t|
     t.integer  "value"
@@ -104,8 +104,6 @@ ActiveRecord::Schema.define(version: 20131220185352) do
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "exists",      default: false
-    t.float    "positive",    default: 0.0
-    t.float    "negative",    default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -115,13 +113,17 @@ ActiveRecord::Schema.define(version: 20131220185352) do
   add_index "statuses", ["profile_id"], name: "index_statuses_on_profile_id"
 
   create_table "votes", force: true do |t|
-    t.boolean  "value"
+    t.boolean  "matched"
     t.integer  "status_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "search_id"
     t.integer  "account_id"
     t.integer  "rating"
+    t.boolean  "human_reviewed",    default: false
+    t.boolean  "machine_reviewed",  default: false
+    t.float    "match_percentage"
+    t.integer  "matched_status_id"
   end
 
   add_index "votes", ["search_id", "status_id", "account_id"], name: "index_votes_on_search_id_and_status_id_and_account_id", unique: true

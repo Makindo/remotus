@@ -1,0 +1,4 @@
+class ChangeVotesValueToMatched < ActiveRecord::Migration
+  def change
+  end
+end

@@ -1,0 +1,4 @@
+class AddMatchedStatusIdToVotes < ActiveRecord::Migration
+  def change
+  end
+end

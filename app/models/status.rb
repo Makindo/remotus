@@ -16,22 +16,6 @@ class Status < ActiveRecord::Base
 
   validates_with StatusValidator
 
-  def self.nonbad
-    joins(:vote).where { id.not_in(Vote.pluck(:id)) | vote.value.eq(true) }
-  end
-
-  def self.neutral
-    where { id.not_in(Vote.pluck(:id)) }
-  end
-
-  def self.good
-    joins(:vote).where { vote.value.eq(true) }
-  end
-
-  def self.bad
-    joins(:vote).where { vote.value.eq(false) }
-  end
-
   def self.result
     joins(:searches).where { searches_statuses.status_id.eq(statuses.id) }
   end
@@ -45,15 +29,7 @@ class Status < ActiveRecord::Base
   end
 
   def self.needs_review
-    joins(:vote).where("votes.rating is not null and votes.value = false")
-  end
-
-  def disliked?
-    !vote.value? if vote.present?
-  end
-
-  def liked?
-    vote.value? if vote.present?
+    joins(:vote).where("votes.machine_reviewed = true and votes.human_reviewed = false")
   end
 
   def fetch_data
@@ -66,14 +42,6 @@ class Status < ActiveRecord::Base
 
   def to_geolocation
     GeolocationFacade.new([latitude, longitude]).geolocation
-  end
-
-  def like
-    if vote then vote.update_attribute(:value, true) else create_vote(value: true) end
-  end
-
-  def dislike
-    if vote then vote.update_attribute(:value, false) else create_vote(value: false) end
   end
 
   def rating

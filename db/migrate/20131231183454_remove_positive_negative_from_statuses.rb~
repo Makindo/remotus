@@ -1,0 +1,4 @@
+class RemovePositiveNegativeFromStatuses < ActiveRecord::Migration
+  def change
+  end
+end

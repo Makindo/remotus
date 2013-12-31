@@ -1,0 +1,4 @@
+class AddHumanReviewedToVotes < ActiveRecord::Migration
+  def change
+  end
+end

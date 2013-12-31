@@ -1,0 +1,4 @@
+class AddMatchPercentageToVotes < ActiveRecord::Migration
+  def change
+  end
+end
