@@ -20,6 +20,7 @@ class StreamSearchWorker
             throw(:close_enough, true)
           end
         end
+        throw(:close_enough, false)
       end
       if @result.valid? && has_a_close_geolocation
         @result.save
