@@ -22,7 +22,10 @@ class StreamSearchWorker
         end
         throw(:close_enough, false)
       end
-      if @result.valid? && has_a_close_geolocation
+
+      raise "not in geotargeted areas" unless has_a_close_geolocation
+
+      if @result.valid?
         @result.save
         UpdateSearchesStatusesCountWorker.perform_async(@search.id)
         FetchPersonWorker.perform_async(@result.profile.id, @account.id)
