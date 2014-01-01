@@ -6,7 +6,7 @@ class Search < ActiveRecord::Base
   has_and_belongs_to_many :statuses
   belongs_to :account
 
-  validates_uniqueness_of :query, :scope => {:type, :account}
+  validates_uniqueness_of :query, :scope => [:type, :account]
   validates_with SearchValidator
 
   def fetch_results
