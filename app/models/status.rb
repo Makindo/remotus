@@ -29,7 +29,7 @@ class Status < ActiveRecord::Base
   end
 
   def self.needs_review
-    joins(:vote).where("votes.machine_reviewed = true and votes.human_reviewed = false")
+    joins(:vote).where("votes.human_reviewed = false")
   end
 
   def fetch_data
