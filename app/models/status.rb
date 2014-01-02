@@ -3,6 +3,11 @@ class Status < ActiveRecord::Base
   include Remotus::External
   include Remotus::Provider
 
+  delegate :match_percentage, to: :vote
+  delegate :human_reviewed, to: :vote
+  delegate :machine_reviewed, to: :vote
+  delegate :matched_status_id, to: :vote
+
   belongs_to :profile
   has_and_belongs_to_many :searches
   has_one :geolocation
