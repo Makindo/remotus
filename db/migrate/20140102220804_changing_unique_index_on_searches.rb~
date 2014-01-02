@@ -1,0 +1,4 @@
+class ChangingUniqueIndexOnSearches < ActiveRecord::Migration
+  def change
+  end
+end
