@@ -12,6 +12,7 @@ class StreamSearchWorker
       @account = @search.account
     
       @result = TwitterStreamResultsForm.new(@search, status)
+      raise "Error in TwitterStreamResultsForm" if @result.blank?
       @result.status.geocode
 
       raise "result status could not be saved" if @result.status.blank?

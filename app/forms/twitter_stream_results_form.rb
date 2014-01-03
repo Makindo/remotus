@@ -6,11 +6,14 @@ class TwitterStreamResultsForm
   def initialize(search, status)
       @search = search
       result = TwitterStreamDenormalizer.new(status).to_hash
+      raise "TwitterStreamResultsForm failure with denormalizer, blank form" if result.blank?
     
       @status = TwitterStatus.new(result[:status])
+      raise "TwitterStreamResultsForm failure with status creation" if @status.blank?
       @status.searches << @search
       @status.profile = TwitterProfile.new(result[:profile])
       @profile = @status.profile
+      raise "TwitterStreamResultsForm failure with profile creation" if @profile.blank? || @status.profile.blank?
   end
 
   def valid?
