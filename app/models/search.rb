@@ -13,6 +13,20 @@ class Search < ActiveRecord::Base
     FetchSearchWorker.perform_async(id)
   end
 
+  def training_set
+    statuses.with_votes.where("votes.human_reviewed = true")
+  end
+
+  def training_set_hash(base_status_id = 0)
+    results = Array.new
+    training_set.limit(500).pluck(:id, :text).each do |status| 
+      unless status[0] == base_status_id
+        results << {id: status[0], text: status[1]}
+      end
+    end
+    if results.size > ENV["MIN_TRAINING_SET_SIZE"].to_i then results else nil end
+  end
+
   def geolocations
     Geolocation.where(source_type: "search", source_id: self.id)
   end
