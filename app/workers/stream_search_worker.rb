@@ -7,12 +7,15 @@ class StreamSearchWorker
   def perform(status, search_id)
     begin
       @search = Search.find(search_id)
+      raise "could not find search" if @search.blank?
+
       @account = @search.account
     
       @result = TwitterStreamResultsForm.new(@search, status)
       @result.status.geocode
 
       raise "result status could not be saved" if @result.status.blank?
+      raise "result could not be geocoded" unless @result.status.respond_to?(:distace_to)
 
       has_a_close_geolocation = catch(:close_enough) do
         @account.geolocations.each do |geo| 
