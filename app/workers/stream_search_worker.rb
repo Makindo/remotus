@@ -20,10 +20,10 @@ class StreamSearchWorker
             throw(:close_enough, true)
           end
         end
-        throw(:close_enough, false)
+        false
       end
 
-      raise "not in geotargeted areas" unless has_a_close_geolocation
+      raise "not in geotargeted areas, status had lat: #{@results.status.latitude} long: #{@result.status.longitude}" unless has_a_close_geolocation
 
       if @result.valid?
         @result.save
