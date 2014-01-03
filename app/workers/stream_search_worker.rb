@@ -15,7 +15,7 @@ class StreamSearchWorker
       @result.status.geocode
 
       raise "result status could not be saved" if @result.status.blank?
-      raise "result could not be geocoded" unless @result.status.respond_to?(:distace_to)
+      raise "result could not be geocoded" unless @result.status.respond_to?(:distance_to)
 
       has_a_close_geolocation = catch(:close_enough) do
         @account.geolocations.each do |geo| 
