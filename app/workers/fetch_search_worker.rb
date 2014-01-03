@@ -10,7 +10,7 @@ class FetchSearchWorker
 
     @geolocations = @resource.account.geolocations || []
     
-    @geolocations.each do |geolocaiton| 
+    @geolocations.each do |geolocation| 
       records(geolocation.id).save
     end
   end

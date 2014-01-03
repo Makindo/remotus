@@ -2,11 +2,10 @@ class TwitterSearchResultsForm
   attr_reader :search
   attr_reader :statuses
   attr_reader :profiles
-  def initialize(search, results, geolocation_id = nil)
-    unless geolocation_id.blank?
-      search_geolocation = Geolocation.find(geolocation_id)
-      @geolocation = TwitterSearchLocation.clone_geo(search_geolocation)
-    end
+  def initialize(search, results, geolocation_id)
+    search_geolocation = Geolocation.find(geolocation_id)
+    @geolocation = TwitterSearchLocation.clone_geo(search_geolocation)
+    
     @search = search
     @statuses = results.map do |result|
       TwitterStatus.new(result[:status]).tap do |status|
