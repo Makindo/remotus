@@ -27,7 +27,7 @@ class StreamSearchWorker
         false
       end
 
-      raise "not in geotargeted areas result object: #{p @result} " has_a_close_geolocation
+      raise "not in geotargeted areas result object: #{p @result}" unless has_a_close_geolocation
 
       if @result.valid?
         @result.save
