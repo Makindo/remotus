@@ -1,3 +1,11 @@
+module StreamErrors
+  class NoSearchError < StandardError; end
+  class ResultsFormError < StandardError; end
+  class NotSaved < StandardError; end
+  class NotGeocoded < StandardError; end
+  class NotInGeoArea < StandardError; end
+end
+
 class StreamSearchWorker
   include Sidekiq::Worker
 
@@ -7,16 +15,16 @@ class StreamSearchWorker
   def perform(status, search_id)
     begin
       @search = Search.find(search_id)
-      raise "could not find search" if @search.blank?
+      raise StreamErrors::NoSearchError if @search.blank?
 
       @account = @search.account
     
       @result = TwitterStreamResultsForm.new(@search, status)
-      raise "Error in TwitterStreamResultsForm" if @result.blank?
+      raise StreamErrors::ResultsFormError if @result.blank?
       @result.status.geocode
 
-      raise "result status could not be saved" if @result.status.blank?
-      raise "result could not be geocoded" unless @result.status.respond_to?(:distance_to)
+      raise StreamErrors::NotSaved  if @result.status.blank?
+      raise StreamErrors::NotGeocoded unless @result.status.respond_to?(:distance_to)
 
       has_a_close_geolocation = catch(:close_enough) do
         @account.geolocations.each do |geo| 
@@ -28,7 +36,7 @@ class StreamSearchWorker
         false
       end
 
-      raise "not in geotargeted areas result object: #{p @result.profile.location}" unless has_a_close_geolocation
+      raise StreamErrors::NotInGeoArea unless has_a_close_geolocation
 
       if @result.valid?
         @result.save
@@ -41,6 +49,8 @@ class StreamSearchWorker
       end
     rescue ActiveRecord::RecordNotUnique
       warn "external_id already exists in system."
+    rescue StreamErrors::NotInGeoArea
+      warn "status was not in a geolcoated area: #{@result.profile.locastion}"
     end
   end
 end
