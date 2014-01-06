@@ -9,4 +9,5 @@ class FetchGeolocationWorker
     query = @resource.city || ""
     @result = Geocoder.search(query).first
     @resource.update_from_geocoder_result(@result)
+  end
 end
