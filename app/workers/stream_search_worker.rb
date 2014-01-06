@@ -20,7 +20,8 @@ class StreamSearchWorker
 
       has_a_close_geolocation = catch(:close_enough) do
         @account.geolocations.each do |geo| 
-          if @result.status.distance_to(geo.city) < geo.radius
+          geo_distance = @result.status.distance_to(geo.city) || Inf
+          if geo_distance < geo.radius
             throw(:close_enough, true)
           end
         end

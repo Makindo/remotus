@@ -6,6 +6,7 @@ class FetchGeolocationWorker
 
   def perform(id)
     @resource = Geolocation.find(id)
-    @resource.update_attributes(remote_class.new(@resource.id).record)
-  end
+    query = @resource.city || ""
+    @result = Geocoder.search(query).first
+    @resource.update_from_geocoder_result(@result)
 end
