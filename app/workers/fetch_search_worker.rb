@@ -9,6 +9,7 @@ class FetchSearchWorker
     raise "no search found" unless @resource.present?
 
     @geolocations = @resource.account.geolocations || []
+    warn "running search #{@resource.query}, with geolocations: #{@geolocations.pluck(:latitude, :longitude)}"
     
     @geolocations.each do |geolocation| 
       records(geolocation.id).save
