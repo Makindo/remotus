@@ -12,6 +12,8 @@ class FetchGeolocationWorker
     raise "geolocation did not have a city" unless query.present?
 
     @result = Geocoder.search(query).first
+    raise "could not find result" unless @result.present?
+
     @geolocation.update_from_geocoder_result(@result)
   end
 end
