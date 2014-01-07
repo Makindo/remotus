@@ -15,5 +15,6 @@ class FetchGeolocationWorker
     raise "could not find result" unless @result.present?
 
     @geolocation.update_from_geocoder_result(@result)
+    @geolocation.save if @geolocation.valid?
   end
 end
