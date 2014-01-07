@@ -5,9 +5,13 @@ class FetchGeolocationWorker
   sidekiq_options queue: :geolocations
 
   def perform(id)
-    @resource = Geolocation.find(id)
-    query = @resource.city || ""
+    @geolocation = Geolocation.find(id)
+    raise "could not find geolocation" unless @geolocation.present?
+
+    query = @geolocation.city
+    raise "geolocation did not have a city" unless query.present?
+
     @result = Geocoder.search(query).first
-    @resource.update_from_geocoder_result(@result)
+    @geolocation.update_from_geocoder_result(@result)
   end
 end
