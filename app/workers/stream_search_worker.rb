@@ -50,7 +50,7 @@ class StreamSearchWorker
     rescue ActiveRecord::RecordNotUnique
       warn "external_id already exists in system."
     rescue StreamErrors::NotInGeoArea
-      warn "status was not in a geolcoated area: #{@result.profile.location}"
+      warn "status was not in a geolocated area: #{@result.profile.location}"
     end
   end
 end
