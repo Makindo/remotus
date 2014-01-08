@@ -8,8 +8,9 @@ class FetchGeolocationWorker
     @geolocation = Geolocation.find(id)
     raise "could not find geolocation" unless @geolocation.present?
 
-    query = @geolocation.city
-    raise "geolocation did not have a city" unless query.present?
+    raise "geolocation did not have a city/stante" unless @geolocation.city.present? && @geolocation.state.present?
+
+    query = "#{@geolocation.city}, #{@geolocation.state}"
 
     @result = Geocoder.search(query).first
     raise "could not find result" unless @result.present?
