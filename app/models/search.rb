@@ -3,7 +3,7 @@ class Search < ActiveRecord::Base
 
   after_create :fetch_results
 
-  has_and_belongs_to_many :statuses
+  has_and_belongs_to_many :statuses, dependent: :destroy
   belongs_to :account
 
   validates_uniqueness_of :query, :scope => [:account_id, :type]
