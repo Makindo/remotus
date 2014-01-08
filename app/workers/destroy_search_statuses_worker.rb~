@@ -1,0 +1,7 @@
+class DestroySearchWorker
+  include Sidekiq::Worker
+
+  def perform(id)
+    @search = Search.find(id)
+  end
+end
