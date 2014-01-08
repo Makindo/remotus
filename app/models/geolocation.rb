@@ -7,6 +7,8 @@ class Geolocation < ActiveRecord::Base
 
   validates_with GeolocationValidator
 
+  after_save :complete_data
+
   def self.complete
     where do
       city.not_eq(nil) & state.not_eq(nil) & zip.not_eq(nil) & country.not_eq(nil)
@@ -44,5 +46,11 @@ class Geolocation < ActiveRecord::Base
     self.zip = result.postal_code
     self.data = result.data || result
     result.present?
+  end
+
+  def complete_data
+    if city.present? && state.present? && latitude.blank? && longitude.blank?
+      fetch_data
+    end
   end
 end
