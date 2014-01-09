@@ -5,14 +5,19 @@ class FetchSearchWorker
   sidekiq_options queue: :searches, retry: 2
 
   def perform(id)
-    @resource = Search.find(id)
-    raise "no search found" unless @resource.present?
+    begin
+      @resource = Search.find(id)
+      raise "no search found" unless @resource.present?
 
-    @geolocations = @resource.account.geolocations || []
-    warn "running search #{@resource.query}, with geolocations: #{@geolocations.pluck(:latitude, :longitude)}"
-    
-    @geolocations.each do |geolocation| 
-      records(geolocation.id).save
+      @geolocations = @resource.account.geolocations || []
+      warn "running search #{@resource.query}, with geolocations: #{@geolocations.pluck(:latitude, :longitude)}"
+      
+      @geolocations.each do |geolocation| 
+        records(geolocation.id).save
+      end
+
+      rescue ActiveRecord::RecordNotUnique
+        warn "status already in db"
     end
   end
 
