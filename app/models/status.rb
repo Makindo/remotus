@@ -11,7 +11,7 @@ class Status < ActiveRecord::Base
   belongs_to :profile
   has_and_belongs_to_many :searches
   has_one :geolocation
-  has_one :vote
+  has_one :vote, dependent: :destroy
   accepts_nested_attributes_for :vote
   before_save :save_vote
   after_save :build_vote
