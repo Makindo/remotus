@@ -8,10 +8,10 @@ class TwitterStreamResultsForm
       result = TwitterStreamDenormalizer.new(status).to_hash
       raise "TwitterStreamResultsForm failure with denormalizer, blank form" if result.blank?
     
-      @status = TwitterStatus.new(result[:status])
+      @status = twitter_status(result)
       raise "TwitterStreamResultsForm failure with status creation" if @status.blank?
       @status.searches << @search
-      @status.profile = TwitterProfile.new(result[:profile])
+      @status.profile = twitter_profile(result)
       @profile = @status.profile
       raise "TwitterStreamResultsForm failure with profile creation" if @profile.blank? || @status.profile.blank?
   end
@@ -29,5 +29,13 @@ class TwitterStreamResultsForm
     @profile.statuses << @status
     @status.save
     @profile.save
+  end
+
+  def twitter_profile(result)
+    TwitterProfile.find_by_external_id(result[:profile][:external_id]) || TwitterProfile.new(result[:profile])
+  end
+
+  def twitter_status(result)
+    TwitterStatus.find_by_external_id(result[:status][:external_id]) || TwitterStatus.new(result[:status])
   end
 end

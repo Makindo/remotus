@@ -8,9 +8,9 @@ class TwitterSearchResultsForm
     
     @search = search
     @statuses = results.map do |result|
-      TwitterStatus.new(result[:status]).tap do |status|
+      twitter_status(result).tap do |status|
         status.searches << @search
-        status.profile = TwitterProfile.new(result[:profile])
+        status.profile = twitter_profile(result)
         status.profile.statuses << status
         unless @geolocation.blank?
           status.profile.geolocations << @geolocation
@@ -50,5 +50,13 @@ class TwitterSearchResultsForm
       end
     end
     @search.save
+  end
+
+  def twitter_status(result)
+    TwitterStatus.find_by_external_id(result[:status][:external_id]) || TwitterStatus.new(result[:status])
+  end
+
+  def twitter_profile(result)
+    TwitterProfile.find_by_external_id(result[:profile][:external_id]) || TwitterProfile.new(result[:profile])
   end
 end

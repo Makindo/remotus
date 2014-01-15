@@ -34,7 +34,7 @@ class Status < ActiveRecord::Base
   end
 
   def self.needs_review
-    joins(:vote).where("votes.machine_reviewed = true and votes.human_reviewed = false and rating is not null")
+    with_votes.where("votes.machine_reviewed = true and votes.human_reviewed = false)
   end
 
   def self.have_not_been_rated

@@ -4,6 +4,8 @@ source "https://rubygems.org/"
 # Specify your gem"s dependencies in remotus.gemspec
 gemspec
 
+gem "gnip", "~> 0.1.0", git: "https://github.com/tylermorgan86/gnip"
+
 group :development, :test do
   gem "pry"
   gem "sqlite3"
