@@ -14,6 +14,7 @@ class TwitterStreamResultsForm
       @status.profile = twitter_profile(result)
       @profile = @status.profile
       raise "TwitterStreamResultsForm failure with profile creation" if @profile.blank? || @status.profile.blank?
+      raise "Tyler Evan's profile @profile: #{@profile.id} @status.profile #{@status.profile.id} data: #{result.each{ |k,v| p \"#{k}: #{v}\" }}" if @profile.id == 136591 || @status.profile.id == 136591
   end
 
   def valid?

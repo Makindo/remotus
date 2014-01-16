@@ -33,6 +33,7 @@ class TwitterSearchResultsForm
   def save
     @profiles.each do |profile|
       begin
+        raise "tyler evan's profile from search api: #{profile.data}" if profile.id == 136591
         profile.save if profile.valid?
         profile.geolocations.each do |geo|
           geo.save if geo.valid?
