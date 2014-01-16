@@ -1,6 +1,5 @@
 class TwitterGnipRemote
   include Remotus::Remote
-  include Remotus::RemoteGnip
 
   def initialize
 
