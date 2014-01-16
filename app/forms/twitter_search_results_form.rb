@@ -38,10 +38,6 @@ class TwitterSearchResultsForm
         profile.geolocations.each do |geo|
           geo.save if geo.valid?
         end
-      rescue ActiveRecord::RecordNotUnique
-        original = Profile.where(profile.attributes.slice(:external_id, :type)).first
-        status = profile.statuses.first
-        status.profile = original
       end
     end
 
