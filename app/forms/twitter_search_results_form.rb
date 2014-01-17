@@ -2,6 +2,7 @@ class TwitterSearchResultsForm
   attr_reader :search
   attr_reader :statuses
   attr_reader :profiles
+
   def initialize(search, results, geolocation_id)
     search_geolocation = Geolocation.find(geolocation_id)
     @geolocation = TwitterSearchLocation.clone_geo(search_geolocation)
@@ -33,7 +34,6 @@ class TwitterSearchResultsForm
   def save
     @profiles.each do |profile|
       begin
-        raise "tyler evan's profile from search api: #{profile.data}" if profile.id == 136591
         profile.save if profile.valid?
         profile.geolocations.each do |geo|
           geo.save if geo.valid?

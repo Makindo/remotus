@@ -6,6 +6,7 @@ require "skittles"
 require "pipl-api"
 require "geocoder"
 require "astruct"
+require "gnip"
 
 module Remotus
 
