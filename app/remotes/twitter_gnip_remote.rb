@@ -9,10 +9,14 @@ class TwitterGnipRemote
     p @stream_client
   end
 
+  def stream
+    @stream_client.stream do |status|
+      GnipStreamWorker.perform_async(JSON.parse(status))
+    end
+  end
+
   def build_rules
-    puts "executing build_rules"
     build_rules_queries
-    puts "done executing build_rules_queries"
     @rules.each do |rule|
       p rule[:tag]
       p @rules_client
@@ -22,13 +26,20 @@ class TwitterGnipRemote
 
   private
   def build_rules_queries
-    puts "executing build_rules_queries"
     @searches = Search.all
     @rules = []
     @searches.each do |search|
       search.account.geolocations.each do |location| 
-        @rules << {value: "#{search.query} point_radius:[#{location.longitude} #{location.latitude} #{location.radius}mi]", tag: "#{search.id}:#{location.id}"}
+        @rules << {value: "#{search.query} point_radius:[#{location.longitude} #{location.latitude} #{distance(location.radius)}]", tag: "#{search.id}:#{location.id}"}
       end
+    end
+  end
+
+  def distance(radius)
+    if radius > 25
+      "25mi"
+    else
+      "#{radius}mi"
     end
   end
 end
