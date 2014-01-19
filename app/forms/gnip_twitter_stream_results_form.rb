@@ -6,6 +6,7 @@ class GnipTwitterStreamResultsForm
 
   def initialize(result)
     @result = result.symbolize_keys!
+    p @result.inspect
     @denorm = GnipTwitterDenormalizer.new(result).to_hash
     @status = twitter_status
     @profile = twitter_profile
@@ -39,6 +40,7 @@ class GnipTwitterStreamResultsForm
 
   def matching_tags
     temp_array = []
+    p "starting matched_tags"
     @result[:gnip][:matching_rules].each do |rule| 
       temp_array << rule["tag"].split(':')
     end
@@ -47,6 +49,7 @@ class GnipTwitterStreamResultsForm
 
   def statuses_ids
     temp_array = []
+    p "starting statuses_ids"
     matching_tags.each do |tag|
       temp_array << tag.first
     end
@@ -63,6 +66,7 @@ class GnipTwitterStreamResultsForm
 
   def find_searches
     temp_array = []
+    p "starting find searches"
     statuses_ids.each do |status_id| 
       temp_array << Status.find(status_id)
     end
