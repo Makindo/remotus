@@ -39,7 +39,7 @@ class GnipTwitterStreamResultsForm
 
   def matching_tags
     temp_array = []
-    @results[:gnip][:matching_rules].each do |rule| 
+    @result[:gnip][:matching_rules].each do |rule| 
       temp_array << rule["tag"].split(':')
     end
     temp_array
