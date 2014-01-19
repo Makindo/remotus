@@ -5,12 +5,18 @@ class GnipTwitterStreamResultsForm
   attr_reader :profile
 
   def initialize(result)
+    puts "initiating"
     @result = result.symbolize_keys!
+    puts "result set"
     p @result.inspect
     @denorm = GnipTwitterDenormalizer.new(result).to_hash
+    puts "denorm set"
     @status = twitter_status
+    puts "status set"
     @profile = twitter_profile
+    puts "profile set"
     @searches = find_searches
+    puts "searches set"
   end
 
 
