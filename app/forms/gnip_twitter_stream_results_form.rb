@@ -5,18 +5,11 @@ class GnipTwitterStreamResultsForm
   attr_reader :profile
 
   def initialize(result)
-    puts "initiating"
     @result = result.symbolize_keys!
-    puts "result set"
-    p @result.inspect
     @denorm = GnipTwitterDenormalizer.new(result).to_hash
-    puts "denorm set"
     @status = twitter_status
-    puts "status set"
     @profile = twitter_profile
-    puts "profile set"
     @searches = find_searches
-    puts "searches set"
   end
 
 
@@ -53,7 +46,7 @@ class GnipTwitterStreamResultsForm
     temp_array
   end
 
-  def statuses_ids
+  def searches_ids
     temp_array = []
     p "starting statuses_ids"
     matching_tags.each do |tag|
@@ -73,8 +66,8 @@ class GnipTwitterStreamResultsForm
   def find_searches
     temp_array = []
     p "starting find searches"
-    statuses_ids.each do |status_id| 
-      temp_array << Status.find(status_id)
+    searches_ids.each do |search_id| 
+      temp_array << Search.find(status_id)
     end
     temp_array
   end
