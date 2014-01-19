@@ -4,7 +4,6 @@ class GnipStreamWorker
 
   def perform(status)
     begin
-      @result = GnipTwitterDenormalizer.new(status)
       @form = GnipTwitterStreamResultsForm.new(status)
                   
       if @form.valid?
