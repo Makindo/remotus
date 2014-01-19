@@ -67,7 +67,7 @@ class GnipTwitterStreamResultsForm
     temp_array = []
     p "starting find searches"
     searches_ids.each do |search_id| 
-      temp_array << Search.find(status_id)
+      temp_array << Search.find(search_id)
     end
     temp_array
   end
