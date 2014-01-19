@@ -19,7 +19,6 @@ class TwitterGnipRemote
     build_rules_queries
     @rules.each do |rule|
       p rule[:tag]
-      p @rules_client
       @rules_client.add_rule(rule)
     end
   end
@@ -30,7 +29,7 @@ class TwitterGnipRemote
     @rules = []
     @searches.each do |search|
       search.account.geolocations.each do |location| 
-        @rules << {value: "#{search.query} point_radius:[#{location.longitude} #{location.latitude} #{distance(location.radius)}]", tag: "#{search.id}:#{location.id}"}
+        @rules << {value: "#{search.query} point_radius:[#{location.longitude} #{location.latitude} #{distance(location.radius)}]", tag: "#{search.id}:#{search.account_id}"}
       end
     end
   end
