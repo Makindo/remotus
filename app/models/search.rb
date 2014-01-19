@@ -13,6 +13,10 @@ class Search < ActiveRecord::Base
     FetchSearchWorker.perform_async(id)
   end
 
+  def fetch_gnip_results
+    FetchGnipSearchWorker.perform_async(id)
+  end
+
   def training_set
     statuses.with_votes.where("votes.human_reviewed = true")
   end
