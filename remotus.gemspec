@@ -30,5 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "redis", "~> 3.0"
   spec.add_runtime_dependency "redis-rails", "~> 4.0"
   spec.add_runtime_dependency "gnip", "~> 0.1.5"
-  spec.add_runtime_dependency "bounding_boxes", "~> 0.1.1"
+  spec.add_runtime_dependency "bounding_boxes", "~> 0.1.2"
 end
