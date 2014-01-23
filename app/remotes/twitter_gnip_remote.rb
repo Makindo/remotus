@@ -32,17 +32,19 @@ class TwitterGnipRemote
     @searches = TwitterStreamSearch.all
     @rules = []
     @searches.each do |search|
-      search.account.geolocations.each do |location| 
-        @rules << {value: "#{search.query} point_radius:[#{location.longitude} #{location.latitude} #{distance(location.radius)}]", tag: "#{search.id}:#{search.account_id}"}
+      search.account.geolocations.each do |geolocation| 
+        geolocation.fetch_gnip_bounding_boxes.each do |bounding_box| 
+        @rules << {value: "#{search.query} " +
+                   "bounding_box:[#{bounding_box.min_long}, " +
+                                 "#{bounding_box.min_lat}, " + 
+                                 "#{bounding_box.max_long}, " + 
+                                 "#{bounding_box.max_lat}]",
+                   tag: "#{search.id}:#{search.account_id}"}
+        end
       end
     end
   end
 
   def distance(radius)
-    if radius > 25
-      "25mi"
-    else
-      "#{radius}mi"
-    end
   end
 end

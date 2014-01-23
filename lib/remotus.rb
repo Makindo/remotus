@@ -7,6 +7,7 @@ require "pipl-api"
 require "geocoder"
 require "astruct"
 require "gnip"
+require "bounding_boxes"
 
 module Remotus
 

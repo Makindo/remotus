@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "rails", "~> 4.0"
   spec.add_runtime_dependency "sidekiq", "~> 2.0"
-  spec.add_runtime_dependency "twitter", "~> 4.6"
+  spec.add_runtime_dependency "twitter", "~> 5.5"
   spec.add_runtime_dependency "tweetstream", "~> 2.6.0"
   spec.add_runtime_dependency "koala", "~> 1.6"
   spec.add_runtime_dependency "skittles", "~> 0.6"
@@ -30,4 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "redis", "~> 3.0"
   spec.add_runtime_dependency "redis-rails", "~> 4.0"
   spec.add_runtime_dependency "gnip", "~> 0.1.5"
+  spec.add_runtime_dependency "bounding_boxes", "~> 0.1.1"
 end
