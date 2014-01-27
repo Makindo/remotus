@@ -40,6 +40,12 @@ class TwitterGnipRemote
                                  "#{bounding_box.max_long.to_s(4)} " + 
                                  "#{bounding_box.max_lat.to_s(4)}]",
                    tag: "#{search.id}:#{search.account_id}"}
+        @rules << {value: "#{search.query} " +
+                   "profile_bounding_box:[#{bounding_box.min_long.to_s(4)} " +
+                   "#{bounding_box.min_lat.to_s(4)} " + 
+                   "#{bounding_box.max_long.to_s(4)} " + 
+                   "#{bounding_box.max_lat.to_s(4)}]",
+                 tag: "#{search.id}:#{search.account_id}"}
         end
       end
     end
