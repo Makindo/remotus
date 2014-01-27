@@ -58,6 +58,6 @@ class Geolocation < ActiveRecord::Base
     raise "not enough data to create gnip bounding boxes" unless latitude.present? && longitude.present? && radius.present?
 
     box = BB::BoundingBox.new(latitude: latitude, longitude: longitude, radius: "#{radius}mi")
-    box.split_geo(20)
+    box.split_geo(25)
   end
 end
