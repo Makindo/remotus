@@ -35,16 +35,16 @@ class TwitterGnipRemote
       search.account.geolocations.each do |geolocation| 
         geolocation.fetch_gnip_bounding_boxes.each do |bounding_box| 
         @rules << {value: "#{search.query} " +
-                   "bounding_box:[#{bounding_box.min_long.to_s(4)} " +
-                                 "#{bounding_box.min_lat.to_s(4)} " + 
-                                 "#{bounding_box.max_long.to_s(4)} " + 
-                                 "#{bounding_box.max_lat.to_s(4)}]",
+                   "bounding_box:[#{bounding_box.min_long.round(4)} " +
+                                 "#{bounding_box.min_lat.round(4)} " + 
+                                 "#{bounding_box.max_long.round(4)} " + 
+                                 "#{bounding_box.max_lat.round(4)}]",
                    tag: "#{search.id}:#{search.account_id}"}
         @rules << {value: "#{search.query} " +
                    "profile_bounding_box:[#{bounding_box.min_long.to_s(4)} " +
-                   "#{bounding_box.min_lat.to_s(4)} " + 
-                   "#{bounding_box.max_long.to_s(4)} " + 
-                   "#{bounding_box.max_lat.to_s(4)}]",
+                   "#{bounding_box.min_lat.round(4)} " + 
+                   "#{bounding_box.max_long.round(4)} " + 
+                   "#{bounding_box.max_lat.round(4)}]",
                  tag: "#{search.id}:#{search.account_id}"}
         end
       end
