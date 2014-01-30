@@ -1,12 +1,12 @@
-class GnipTwitterStreamResultsForm
+2class GnipTwitterStreamResultsForm
   attr_reader :searches_ids
   attr_reader :accounts_ids
   attr_reader :status
   attr_reader :profile
 
   def initialize(result)
-    @result = result.symbolize_keys!
-    @denorm = GnipTwitterDenormalizer.new(result).to_hash
+    @result = result.deep_symbolize_keys!
+    @denorm = GnipTwitterDenormalizer.new(@result).to_hash
     @status = twitter_status
     @profile = twitter_profile
     @searches = find_searches
