@@ -1,4 +1,4 @@
-2class GnipTwitterStreamResultsForm
+class GnipTwitterStreamResultsForm
   attr_reader :searches_ids
   attr_reader :accounts_ids
   attr_reader :status
