@@ -3,7 +3,7 @@ class GnipTwitterDenormalizer
 
   def initialize(result)
     @result = result.deep_symbolize_keys!
-    @profile = GnipTwitterProfileDenormalizer.new(@result[:actor], @result[:location])
+    @profile = GnipTwitterProfileDenormalizer.new(@result[:actor], @result[:actor][:location])
     @status = GnipTwitterStatusDenormalizer.new(@result)
   end
 
