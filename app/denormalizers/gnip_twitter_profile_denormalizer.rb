@@ -4,7 +4,7 @@ class GnipTwitterProfileDenormalizer
   def initialize(profile, location)
     @profile_data = profile.to_hash
     @profile_data.deep_symbolize_keys!
-    @location_data = location.to_hash
+    @location_data = location.to_hash unless location.is_a? Hash
     @location_data.deep_symbolize_keys!
   end
 

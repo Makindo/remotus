@@ -18,7 +18,7 @@ class TwitterSearchRemote
     @options = SEARCH_OPTIONS.merge(max_id: max) if max
     begin
       if @geolocation.present?
-        @results = @client.search(query, @options || SEARCH_OPTIONS).results
+        @results = @client.search(query, @options || SEARCH_OPTIONS)
         warn("SearchQuery: #{query}, options: #{@options}, geocoded city: #{@geolocation.city}")
         warn("SearchResults: #{@results}")
       else
