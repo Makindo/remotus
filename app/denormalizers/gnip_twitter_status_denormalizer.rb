@@ -8,7 +8,7 @@ class GnipTwitterStatusDenormalizer
     if @data.has_key?(:geo)
       @data[:geo][:coordinates]
     else
-      {latitude: nil, longitude: nil}
+      [nil, nil]
     end
   end
 
