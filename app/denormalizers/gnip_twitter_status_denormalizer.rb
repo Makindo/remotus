@@ -23,7 +23,7 @@ class GnipTwitterStatusDenormalizer
   def to_hash
     {
      external_id: @data[:object][:id].split(':').last,
-     text: @data[:object][:summary],
+     text: @data[:body],
      latitude: latitude,
      longitude: longitude,
      data: @data,
