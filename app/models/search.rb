@@ -23,7 +23,7 @@ class Search < ActiveRecord::Base
 
   def training_set_hash(base_status_id = 0)
     results = Array.new
-    training_set.limit(100).pluck(:id, :text).each do |status| 
+    training_set.limit(ENV["MAX_TRAINING_SET_SIZE"].to_i).pluck(:id, :text).each do |status| 
       unless status[0] == base_status_id
         results << {id: status[0], text: status[1]}
       end
