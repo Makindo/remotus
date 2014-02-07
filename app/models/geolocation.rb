@@ -9,6 +9,9 @@ class Geolocation < ActiveRecord::Base
 
   after_save :complete_data
 
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :reverse_geocode
+
   def self.complete
     where do
       city.not_eq(nil) & state.not_eq(nil) & zip.not_eq(nil) & country.not_eq(nil)
@@ -61,3 +64,5 @@ class Geolocation < ActiveRecord::Base
     box.split_geo(20)
   end
 end
+
+
