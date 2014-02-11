@@ -10,7 +10,6 @@ class Geolocation < ActiveRecord::Base
   after_save :complete_data
 
   reverse_geocoded_by :latitude, :longitude
-  after_validation :reverse_geocode
 
   def self.complete
     where do
