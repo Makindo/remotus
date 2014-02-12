@@ -34,6 +34,10 @@ class Status < ActiveRecord::Base
     joins(:vote).where("votes.rating is null")
   end
 
+  def self.includes_votes
+    includes(:vote).where("votes.rating is not null")
+  end
+
   def self.with_votes
     joins(:vote).where("votes.rating is not null")
   end

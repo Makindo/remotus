@@ -18,7 +18,7 @@ class Search < ActiveRecord::Base
   end
 
   def training_set
-    statuses.with_votes.where("votes.human_reviewed = true and votes.rating is not null")
+    statuses.includes_votes.where("votes.human_reviewed = true and votes.rating is not null")
   end
 
   def training_set_hash(base_status_id = 0)
