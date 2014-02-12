@@ -16,6 +16,11 @@ class Status < ActiveRecord::Base
   before_save :save_vote
   after_save :build_vote
 
+  #statistics tracking
+  before_create :increase_create_count
+  before_save :increase_save_count
+  before_update :increase_update_count
+
   reverse_geocoded_by :latitude, :longitude
   after_validation :geocode
 
@@ -77,5 +82,17 @@ class Status < ActiveRecord::Base
 
   def save_vote
     vote.save if vote.present?
+  end
+
+  def increase_count(method_count)
+    IncreaseDailyStatsWorker.perform_async(self.class.to_s, method_count)
+  end
+
+  def method_missing(method, *args, &block)
+    if method.to_s =~ /^increase_(.+)_count$/
+      increase_count($1)
+    else
+      super
+    end    
   end
 end

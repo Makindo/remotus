@@ -41,4 +41,16 @@ class Profile < ActiveRecord::Base
       FetchGeolocationWorker.perform_async(id)
     end
   end
+
+  def increase_count(method_count)
+    IncreaseDailyStatsWorker.perform_async(self.class.to_s, method_count)
+  end
+
+  def method_missint(method, *args, &block)
+    if method.to_s =~ /^increase_(.+)_count$/
+      increase_count($1)
+    else
+      super
+    end
+  end
 end
